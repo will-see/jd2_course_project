@@ -1,39 +1,33 @@
 package com.pvt.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "ITEMS")
 public class Item {
-    private long itemId;
-    private long formularId;
-    private long bookId;
+    @Id
+    @GenericGenerator(name = "item-book",
+            strategy = "foreign",
+            parameters = @org.hibernate.annotations.Parameter(name = "property", value = "book"))
+    @GeneratedValue(generator = "item-book")
+    @Column(name = "ITEM_ID")
+    private Long itemId;
 
-    public Item() {
-    }
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "FORMULAR_ID")
+    private Formular formularId;
 
-    public Item( long formularId, long bookId) {
-        this.formularId = formularId;
-        this.bookId = bookId;
-    }
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "BOOK_ID")
+    private Book book;
 
-    public long getId() {
-        return itemId;
-    }
-
-    public void setId(long itemId) {
-        this.itemId = itemId;
-    }
-
-    public long getFormularId() {
-        return formularId;
-    }
-
-    public void setFormularId(long formularId) {
-        this.formularId = formularId;
-    }
-
-    public long getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(long bookId) {
-        this.bookId = bookId;
-    }
 }

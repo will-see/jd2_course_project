@@ -1,22 +1,23 @@
 package com.pvt.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "ROLES")
 public class Role {
-        private long roleId;
-        String role;
+    @Id
+    @Column(name = "ROLE_ID")
+    private String roleId;
+    @Column (name = "ROLE_NAME")
+    private String roleName;
 
-    public long getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(long roleId) {
-        this.roleId = roleId;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
+    @OneToOne(mappedBy = "role", cascade = {CascadeType.ALL})
+    private User user;
 }
