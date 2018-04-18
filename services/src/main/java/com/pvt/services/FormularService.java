@@ -12,7 +12,7 @@ public interface FormularService {
     Formular createFormular(long userId, long bookId);
     Formular get(Serializable id);
     void update(Formular formular);
-    int delete(Serializable id);
+    void delete(Formular formular);
 
     List<Formular> getByUserId(long userId);
     List<FormularDto> getUserFormular(long userId);

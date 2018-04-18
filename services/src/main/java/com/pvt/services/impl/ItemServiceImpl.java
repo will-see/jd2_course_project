@@ -42,8 +42,7 @@ public class ItemServiceImpl extends AbstractService implements ItemService {
     }
 
     @Override
-    public int delete(Serializable id) {
-        return 0;
+    public void delete(Item item) {
     }
 
     @Override

@@ -13,7 +13,7 @@ public interface ItemService {
 
     void update(Item item);
 
-    int delete(Serializable id);
+    void delete(Item item);
 
     List<Item> getByFormularId(long formularId);
 }

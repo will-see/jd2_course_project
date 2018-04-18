@@ -1,27 +1,50 @@
 package com.pvt.DAO.impl;
 
-import com.pvt.db.ConnectionManager;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 public abstract class AbstractDao {
 
-    protected PreparedStatement prepareStatement(String query) throws SQLException {
-        return ConnectionManager.getConnection().prepareStatement(query);
-    }
+    private static EntityManager curentEm = null;
+    private static EntityManagerFactory emFactory = null;
 
-    protected PreparedStatement prepareStatement(String query, int flag) throws SQLException {
-        return ConnectionManager.getConnection().prepareStatement(query, flag);
-    }
-
-    protected void close(ResultSet rs) {
-        try {
-            if (rs != null)
-                rs.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+    /*методы для вызова и закрытия emFactry*/
+    public static EntityManager getEntityManager(String unit) {
+        if (emFactory == null) {
+            emFactory = Persistence.createEntityManagerFactory(unit);
         }
+        return emFactory.createEntityManager();
     }
+
+    public static void closeEMFactory() {
+        emFactory.close();
+    }
+
+
+    /*методы для вызова и закрытия EM*/
+    public EntityManager openEm() {
+        curentEm = getEntityManager("lib-validate");
+        return curentEm;
+    }
+
+    public void closeEm() {
+        getEm().close();
+    }
+
+    public EntityManager openEmTransact() {
+        curentEm = getEntityManager("lib-update");
+        curentEm.getTransaction().begin();
+        return curentEm;
+    }
+
+    public void closeEmTransact() {
+        getEm().getTransaction().commit();
+        getEm().close();
+    }
+
+    public EntityManager getEm() {
+        return curentEm;
+    }
+
 }

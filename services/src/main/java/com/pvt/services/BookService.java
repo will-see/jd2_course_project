@@ -11,7 +11,7 @@ public interface BookService {
     Book get(Serializable id);
     void update(Book book);
     void updateCount(long bookId, int bookCount);
-    int delete(Serializable id);
-    Book getByNameAndGanr(String name, String ganr);
+    void delete(Book book);
+//    Book getByNameAndGanr(String name, String ganr);
     List<BookDto> getAll();
 }

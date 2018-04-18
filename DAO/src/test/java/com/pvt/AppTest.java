@@ -1,11 +1,21 @@
 package com.pvt;
 
+import com.pvt.DAO.AuthorDao;
+import com.pvt.DAO.BookDao;
 import com.pvt.DAO.UserDao;
+import com.pvt.DAO.impl.AuthorDaoImpl;
+import com.pvt.DAO.impl.BookDaoImpl;
 import com.pvt.DAO.impl.UserDaoImpl;
+import com.pvt.dto.BookDto;
+import com.pvt.entities.Author;
+import com.pvt.entities.Book;
 import com.pvt.entities.User;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -18,21 +28,27 @@ public class AppTest {
      *
      */
     @Test
-    public void rbTest() {
-        Locale locale = new Locale("en");
-        ResourceBundle rb = ResourceBundle.getBundle("messages", locale);
-        System.out.println(rb.getString("login.login"));
-        System.out.println(rb.getString("login.register"));
+    public void Tests() {
+        User user = new User();
+        System.out.println(user);
+    }
+    @Test
+    public void TestDAO()throws SQLException{
+        BookDao bookDao = BookDaoImpl.getInstance();
+        bookDao.openEmTransact();
+//        bookDao.save(new Book("name","ganr",100,new Author(null,"name",1900,"country",null),10));
+        List<BookDto> list = bookDao.getAll();
+        bookDao.closeEmTransact();
+//        Assert.assertNotEquals(list.size(),0);
+    }
+    @Test
+    public void TestAuthorDAO()throws SQLException{
+        AuthorDao authorDao = AuthorDaoImpl.getInstance();
+        authorDao.openEmTransact();
+        authorDao.save(new Author(null,"name",1900,"country",null));
+//        List<BookDto> list = bookDao.getAll();
+        authorDao.closeEmTransact();
+//        Assert.assertNotEquals(list.size(),0);
     }
 
-    @Test
-    public void daoTest() throws SQLException {
-        UserDao userDao = UserDaoImpl.getInstance();
-        User user = userDao.get(2l);
-        System.out.println(user);
-//        user.setRole("0");
-//        user.setRole("1");
-//        System.out.println(user);
-//        userDao.update(user);
-    }
 }

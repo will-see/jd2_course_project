@@ -48,7 +48,7 @@ public class FormularServiceImpl extends AbstractService implements FormularServ
     public Formular createFormular(long userId, long bookId) {
         Formular formular = new Formular();
         try {
-            formular.setUserId(userId);
+//            formular.setUserId(userId);
             formular.setBookId(bookId);
             formularDao.save(formular);
             return formular;
@@ -76,11 +76,11 @@ public class FormularServiceImpl extends AbstractService implements FormularServ
     }
 
     @Override
-    public int delete(Serializable id) {
+    public void delete(Formular formular) {
         try {
-            return formularDao.delete(id);
+            formularDao.delete(formular);
         } catch (SQLException e) {
-            throw new ServiceException("Error deleting Formular by id" + id);
+            throw new ServiceException("Error deleting Formular by id" + formular);
         }
     }
 

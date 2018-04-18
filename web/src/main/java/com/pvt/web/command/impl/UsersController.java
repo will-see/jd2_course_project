@@ -3,6 +3,7 @@ package com.pvt.web.command.impl;
 import com.pvt.DAO.UserDao;
 import com.pvt.DAO.impl.UserDaoImpl;
 import com.pvt.dto.UsersDto;
+import com.pvt.entities.Role;
 import com.pvt.entities.User;
 import com.pvt.services.UserService;
 import com.pvt.services.impl.UserServiceImpl;
@@ -30,18 +31,18 @@ public class UsersController implements Controller {
         String flag = req.getParameter("flag");
         if (flag != null) {
             String id = req.getParameter("userId");
-            String role = req.getParameter("role");
+            Role role = (new Role());
             flag = "";
             try {
                 User fakeUser = new User();
                 fakeUser.setUserId(Long.parseLong(id));
                 fakeUser.setRole(role);
 //                User fakeUser = userService.get(Long.parseLong(id));
-                if (role.equalsIgnoreCase("reader")) {
-                    fakeUser.setRole("1");
+                if (role.getRoleName().equalsIgnoreCase("reader")) {
+//                    fakeUser.setRole(role.setRoleId("1"));
                     userService.update(fakeUser);
                 } else {
-                    fakeUser.setRole("0");
+//                    fakeUser.setRole("0");
                     userService.update(fakeUser);
                 }
             } catch (Exception e) {

@@ -53,11 +53,13 @@ public class UserServiceImpl extends AbstractService implements UserService {
     }
 
     @Override
-    public int delete(Serializable id) {
+    public void delete(User user) {
         try {
-            return userDao.delete(id);
+            userDao.openEmTransact();
+            userDao.delete(user);
+            userDao.closeEmTransact();
         } catch (SQLException e) {
-            throw new ServiceException("Error deleting User by id" + id);
+            throw new ServiceException("Error deleting User by id" + user);
         }
     }
 

@@ -60,22 +60,22 @@ public class BookServiceImpl extends AbstractService implements BookService {
     }
 
     @Override
-    public int delete(Serializable id) {
+    public void delete(Book book) {
         try {
-            return bookDao.delete(id);
+            bookDao.delete(book);
         } catch (SQLException e) {
-            throw new ServiceException("Error deleting Book by id" + id);
+            throw new ServiceException("Error deleting Book by id" + book);
         }
     }
 
-    @Override
-    public Book getByNameAndGanr(String name, String ganr) {
-        try {
-            return bookDao.getByNameAndGanr(name, ganr);
-        } catch (SQLException e) {
-            throw new ServiceException("Error getting by BookGanr:" + ganr + " and bookName:" + name);
-        }
-    }
+//    @Override
+//    public Book getByNameAndGanr(String name, String ganr) {
+//        try {
+//            return bookDao.getByNameAndGanr(name, ganr);
+//        } catch (SQLException e) {
+//            throw new ServiceException("Error getting by BookGanr:" + ganr + " and bookName:" + name);
+//        }
+//    }
 
     @Override
     public List<BookDto> getAll() {

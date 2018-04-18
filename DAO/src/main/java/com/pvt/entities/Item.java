@@ -24,7 +24,7 @@ public class Item {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FORMULAR_ID")
-    private Formular formularId;
+    private Formular formular;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "BOOK_ID")

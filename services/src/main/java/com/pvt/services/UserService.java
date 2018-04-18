@@ -11,7 +11,7 @@ public interface UserService {
     User createUser(String name, String login, String password, int age, String sex);
     User get(Serializable id);
     void update(User user);
-    int delete(Serializable id);
+    void delete(User user);
 
     User getByLogin(String login);
     List<UsersDto> getAll();
