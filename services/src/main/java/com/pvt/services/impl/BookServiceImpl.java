@@ -18,11 +18,11 @@ public class BookServiceImpl extends AbstractService implements BookService {
 
 
     @Override
-    public Book createBook(String name, String ganr, int pages, long author, int bookCount) {
+    public Book createBook(String title, String ganr, int pages, long author, int bookCount) {
         Book book = new Book();
         try {
             startTransaction();
-            book.setName(name);
+            book.setTitle(title);
             book = bookDao.save(book);
             commit();
             return book;
@@ -80,9 +80,9 @@ public class BookServiceImpl extends AbstractService implements BookService {
     @Override
     public List<BookDto> getAll() {
         try {
-            startTransaction();
+            bookDao.openEmTransact();
             List<BookDto> list = bookDao.getAll();
-            commit();
+            bookDao.closeEmTransact();
             return list;
         } catch (SQLException e) {
             rollback();

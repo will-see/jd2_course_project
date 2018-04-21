@@ -18,7 +18,7 @@ public class Book {
     private Long bookId;
 
     @Column
-    private String name;
+    private String title;
 
     @Column
     private String ganr;
@@ -26,7 +26,7 @@ public class Book {
     @Column
     private int pages;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn (name = "AUTHOR_ID")
     private Author author;
 
@@ -36,8 +36,8 @@ public class Book {
     @OneToOne(mappedBy = "book", cascade = {CascadeType.ALL})
     private Item item;
 
-    public Book(String name, String ganr, int pages, Author author, int bookCount) {
-        this.name = name;
+    public Book(String title, String ganr, int pages, Author author, int bookCount) {
+        this.title = title;
         this.ganr = ganr;
         this.pages = pages;
         this.author = author;

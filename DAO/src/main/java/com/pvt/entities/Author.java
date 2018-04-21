@@ -24,6 +24,6 @@ public class Author {
     @Column
     private String country;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
-    private List<Book> books;
+    @OneToOne(mappedBy = "author", cascade = CascadeType.ALL)
+    private Book books;
 }

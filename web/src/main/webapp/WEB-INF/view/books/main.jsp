@@ -28,7 +28,7 @@
             </script>
             <c:forEach var="book" items="${books}" varStatus="status">
                 <tr class="info">
-                    <td class="col-md-1">${book.name}</td>
+                    <td class="col-md-1">${book.title}</td>
                     <div class="col-md-2">
                         <td class="col-md-1">${book.ganr}</td>
                         <td class="col-md-1">${book.pages}</td>

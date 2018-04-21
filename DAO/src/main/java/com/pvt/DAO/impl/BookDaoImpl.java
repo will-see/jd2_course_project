@@ -59,7 +59,7 @@ public class BookDaoImpl extends AbstractDao implements BookDao {
 
     @Override
     public List<BookDto> getAll() throws SQLException {
-        Query query = getEm().createNativeQuery("SELECT bookId, b.name, ganr,pages, a.name, bookCount FROM books b JOIN authors a ON b.AUTHOR_ID = a.authorId order by bookId;");
+        Query query = getEm().createNativeQuery("SELECT bookId, b.title, ganr,pages, a.name, bookCount FROM books b JOIN authors a ON b.AUTHOR_ID = a.authorId order by bookId;");
         return query.getResultList();
     }
 //

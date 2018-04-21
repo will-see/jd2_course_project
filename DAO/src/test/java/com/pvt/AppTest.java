@@ -37,7 +37,20 @@ public class AppTest {
         BookDao bookDao = BookDaoImpl.getInstance();
         bookDao.openEmTransact();
 //        bookDao.save(new Book("name","ganr",100,new Author(null,"name",1900,"country",null),10));
+//        bookDao.save(new Book("name","ganr",100,new Author(),10));
         List<BookDto> list = bookDao.getAll();
+        System.out.println(list);
+        bookDao.closeEmTransact();
+//        Assert.assertNotEquals(list.size(),0);
+    }
+    @Test
+    public void TestDaoGetById()throws SQLException{
+        BookDao bookDao = BookDaoImpl.getInstance();
+        bookDao.openEmTransact();
+//        bookDao.save(new Book("name","ganr",100,new Author(null,"name",1900,"country",null),10));
+//        bookDao.save(new Book("name","ganr",100,new Author(),10));
+        Book book = bookDao.get(4L);
+        System.out.println(book.getTitle());
         bookDao.closeEmTransact();
 //        Assert.assertNotEquals(list.size(),0);
     }
