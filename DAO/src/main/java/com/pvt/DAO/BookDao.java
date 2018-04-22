@@ -6,11 +6,9 @@ import com.pvt.entities.Book;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface BookDao extends DAO<Book> {
+public interface BookDao<T> extends DAO<T> {
 
-//    Book getByNameAndGanr(String name, String ganr) throws SQLException;
+    List<T> getAll() throws SQLException;
     void updateCount(long bookId, int bookCount) throws SQLException;
-//    List<Book> getAll() throws SQLException;
-//    List<BookDto> getAllDto() throws SQLException;
-    List<BookDto> getAll() throws SQLException;
+    List<BookDto> getAllDto() throws SQLException;
 }

@@ -5,6 +5,6 @@ import com.pvt.entities.Item;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface ItemDao extends DAO<Item>{
-    List<Item> getByFormularId(long formularId) throws SQLException;
+public interface ItemDao<T> extends DAO<T>{
+    List<T> getByFormularId(long formularId) throws SQLException;
 }

@@ -6,22 +6,12 @@ import java.sql.SQLException;
 
 public interface DAO<T> {
 
-    T save(T t) throws SQLException;
+    T add(T t);
 
-    T get(Serializable id) throws SQLException;
+    T get(Serializable id);
 
-    void update(T t) throws SQLException;
+    T update(T t);
 
-    void delete(T t) throws SQLException;
-
-    EntityManager openEm();
-
-    void closeEm();
-
-    EntityManager openEmTransact();
-
-    void closeEmTransact();
-
-    EntityManager getEm();
+    void delete(Serializable id);
 
 }

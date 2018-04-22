@@ -7,61 +7,83 @@ import com.pvt.DAO.impl.AuthorDaoImpl;
 import com.pvt.DAO.impl.BookDaoImpl;
 import com.pvt.DAO.impl.UserDaoImpl;
 import com.pvt.dto.BookDto;
-import com.pvt.entities.Author;
-import com.pvt.entities.Book;
-import com.pvt.entities.User;
+import com.pvt.entities.*;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Commit;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.concurrent.ForkJoinPool;
+
+import static org.junit.Assert.assertNotNull;
+import static org.springframework.test.util.AssertionErrors.assertEquals;
 
 /**
  * Unit test for simple App.
  */
+@ContextConfiguration("/testContext.xml")
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@Transactional()
+//@Commit
 public class AppTest {
     /**
      * Create the test case
      *
      */
-    @Test
-    public void Tests() {
-        User user = new User();
-        System.out.println(user);
-    }
-    @Test
-    public void TestDAO()throws SQLException{
-        BookDao bookDao = BookDaoImpl.getInstance();
-        bookDao.openEmTransact();
-//        bookDao.save(new Book("name","ganr",100,new Author(null,"name",1900,"country",null),10));
-//        bookDao.save(new Book("name","ganr",100,new Author(),10));
-        List<BookDto> list = bookDao.getAll();
-        System.out.println(list);
-        bookDao.closeEmTransact();
-//        Assert.assertNotEquals(list.size(),0);
-    }
-    @Test
-    public void TestDaoGetById()throws SQLException{
-        BookDao bookDao = BookDaoImpl.getInstance();
-        bookDao.openEmTransact();
-//        bookDao.save(new Book("name","ganr",100,new Author(null,"name",1900,"country",null),10));
-//        bookDao.save(new Book("name","ganr",100,new Author(),10));
-        Book book = bookDao.get(4L);
-        System.out.println(book.getTitle());
-        bookDao.closeEmTransact();
-//        Assert.assertNotEquals(list.size(),0);
-    }
-    @Test
-    public void TestAuthorDAO()throws SQLException{
-        AuthorDao authorDao = AuthorDaoImpl.getInstance();
-        authorDao.openEmTransact();
-        authorDao.save(new Author(null,"name",1900,"country",null));
-//        List<BookDto> list = bookDao.getAll();
-        authorDao.closeEmTransact();
-//        Assert.assertNotEquals(list.size(),0);
-    }
+    @Autowired
+    private UserDao userDao;
 
+    @Test
+    public void EntityTest() {
+        Author author = new Author();
+        Book book = new Book();
+        Formular formular = new Formular();
+        Item item = new Item();
+        Role role = new Role();
+        User user = new User();
+
+        author.setName("Pushkin");
+        book.setTitle("Lukomor'e");
+        author.setBooks(book);
+        user.setName("Petia");
+        user.setFormulars(new ArrayList<>());
+        user.getFormulars().add(formular);
+
+        Assert.assertNotEquals(user,null);
+
+//        System.out.println(user);
+//        System.out.println(formular);
+    }
+    @Test
+    public void addUser() throws SQLException {
+        User user = new User();
+        user.setName("TestUser");
+        user.setAge(30);
+        user.setLogin("TestLogin");
+        User persistent =(User) userDao.add(user);
+        assertNotNull(persistent.getUserId());
+        persistent =(User) userDao.get(persistent.getUserId());
+        assertEquals("User not persist", user, persistent);
+        List<User> allUsers=userDao.getAll();
+
+        for (User allUser : allUsers) {
+            System.out.println(allUser);
+        }
+        System.out.println(userDao.getByLogin("TestLogin"));
+        userDao.delete(persistent.getUserId());
+    }
+    @Test
+    public void tempTest(){
+     userDao.delete(10l);
+    }
 }
