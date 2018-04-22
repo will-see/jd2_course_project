@@ -5,18 +5,24 @@ import com.pvt.DAO.impl.AuthorDaoImpl;
 import com.pvt.entities.Author;
 import com.pvt.services.AuthorService;
 import com.pvt.services.ServiceException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
+@Service
+@Transactional
+public class AuthorServiceImpl implements AuthorService<Author> {
 
-public class AuthorServiceImpl extends AbstractService implements AuthorService {
-    private static volatile AuthorService INSTANCE = null;
-    private AuthorDao authorDao = AuthorDaoImpl.getInstance();
+    @Autowired
+    AuthorDao authorDao;
 
     @Override
     public Author getByName(String name) {
         try {
-            return authorDao.getByName(name);
+            return (Author)authorDao.getByName(name);
         } catch (SQLException e) {
             throw new ServiceException("Error getting Author by login" + name);
         }
@@ -25,27 +31,30 @@ public class AuthorServiceImpl extends AbstractService implements AuthorService 
     @Override
     public List<Author> getAll() {
         try {
-            startTransaction();
             List<Author> list = authorDao.getAll();
-            commit();
             return list;
         } catch (SQLException e) {
-            rollback();
             throw new ServiceException("Error getting Authors");
         }
     }
 
-    public static AuthorService getInstance() {
-        AuthorService authorService = INSTANCE;
-        if (authorService == null) {
-            synchronized (AuthorServiceImpl.class) {
-                authorService = INSTANCE;
-                if (authorService == null) {
-                    INSTANCE = authorService = new AuthorServiceImpl();
-                }
-            }
-        }
+    @Override
+    public void add(Author author) {
+        authorDao.add(author);
+    }
 
-        return authorService;
+    @Override
+    public void update(Author author) {
+        authorDao.update(author);
+    }
+
+    @Override
+    public Author get(Serializable id) {
+        return (Author) authorDao.get(id);
+    }
+
+    @Override
+    public void deleteId(Serializable id) {
+        authorDao.delete(id);
     }
 }

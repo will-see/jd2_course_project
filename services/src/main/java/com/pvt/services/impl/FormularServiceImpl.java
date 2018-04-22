@@ -10,99 +10,61 @@ import com.pvt.dto.FormularDto;
 import com.pvt.entities.Formular;
 import com.pvt.services.FormularService;
 import com.pvt.services.ServiceException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
+@Service
+@Transactional
+public class FormularServiceImpl implements FormularService<Formular> {
 
-public class FormularServiceImpl extends AbstractService implements FormularService {
-    private static volatile FormularService INSTANCE = null;
-
-    private FormularDao formularDao = FormularDaoImpl.getInstance();
-    private BookDao bookDao = BookDaoImpl.getInstance();
-    private ItemDao itemDao = ItemDaoImpl.getInstance();
+    @Autowired
+    FormularDao formularDao;
 
 //    @Override
 //    public Formular createFormular(long userId, long bookId) {
 //        Formular formular = new Formular();
 //        try {
-//            startTransaction();
-//            formular.setUserId(userId);
+////            formular.setUserId(userId);
 //            formular.setBookId(bookId);
-//
-//            formular = formularDao.save(formular);
-//
-//            Item item = new Item(formular.getFormularId(), bookId);
-//            itemDao.save(item);
-//            commit();
+//            formularDao.save(formular);
 //            return formular;
 //        } catch (SQLException e) {
-//            rollback();
-//            throw new ServiceException("Error creating Formular " + formular, e);
+//            throw new ServiceException("Error creating Formular" + formular, e);
 //        }
 //    }
 
 
     @Override
-    public Formular createFormular(long userId, long bookId) {
-        Formular formular = new Formular();
-        try {
-//            formular.setUserId(userId);
-            formular.setBookId(bookId);
-            formularDao.save(formular);
-            return formular;
-        } catch (SQLException e) {
-            throw new ServiceException("Error creating Formular" + formular, e);
-        }
+    public void add(Formular formular) {
+        formularDao.add(formular);
     }
+
 
     @Override
     public Formular get(Serializable id) {
-        try {
-            return formularDao.get(id);
-        } catch (SQLException e) {
-            throw new ServiceException("Error getting Formular by id" + id);
-        }
+            return (Formular)formularDao.get(id);
     }
 
     @Override
     public void update(Formular formular) {
-        try {
             formularDao.update(formular);
-        } catch (SQLException e) {
-            throw new ServiceException("Error updating Formular by id" + formular);
-        }
     }
 
     @Override
-    public void delete(Formular formular) {
-        try {
-            formularDao.delete(formular);
-        } catch (SQLException e) {
-            throw new ServiceException("Error deleting Formular by id" + formular);
-        }
+    public void deleteId(Serializable id) {
+        formularDao.delete(id);
     }
 
     @Override
     public List<Formular> getByUserId(long userId) {
         try {
-//            startTransaction();
-//            List<Formular> formulars = formularDao.getByUserId(userId);
-//            for (Formular formular : formulars) {
-//                List<Item> items = itemDao.getByFormularId(formular.getFormularId());
-//                formular.setItems(items);
-//                double sum = 0;
-//                for (Item item : items) {
-//                    Book book = bookDao.get(item.getBookId());
-//                    sum += product.getPrice() * item.getQuantity();
-//                }
-//                commit();
-//                formular.setTotal(sum);
-//            }
             return formularDao.getByUserId(userId);
         } catch (SQLException e) {
-//            rollback();
             throw new ServiceException("Error getting Formularss by userId" + userId);
         }
     }
@@ -110,24 +72,10 @@ public class FormularServiceImpl extends AbstractService implements FormularServ
     @Override
     public List<FormularDto> getUserFormular(long userId) {
         try {
-        return formularDao.getUserFormular(userId);
-    } catch (SQLException e) {
-//            rollback();
-        throw new ServiceException("Error getting User Formular by userId" + userId);
-    }
-    }
-
-    public static FormularService getInstance() {
-        FormularService formularService = INSTANCE;
-        if (formularService == null) {
-            synchronized (FormularServiceImpl.class) {
-                formularService = INSTANCE;
-                if (formularService == null) {
-                    INSTANCE = formularService = new FormularServiceImpl();
-                }
-            }
+            return formularDao.getUserFormular(userId);
+        } catch (SQLException e) {
+            throw new ServiceException("Error getting User Formular by userId" + userId);
         }
-
-        return formularService;
     }
+
 }

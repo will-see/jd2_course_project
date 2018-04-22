@@ -31,7 +31,7 @@ public class RegisterController implements Controller {
 
         if (login != null || password != null || name != null || age != null || sex != null) {
         int intAge = Integer.parseInt(age);
-            User user = userService.createUser(name, login, password, intAge, sex);
+            User user = userService.create(name, login, password, intAge, sex);
 //        if (user != null && user.getPassword().equals(Encoder.encode(password))) {
 //        if (user != null && password.equals(user.getPassword())) {
 //            req.getSession().setAttribute("user", user);

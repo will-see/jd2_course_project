@@ -42,6 +42,8 @@ public class AppTest {
      */
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private BookDao bookDao;
 
     @Test
     public void EntityTest() {
@@ -83,7 +85,8 @@ public class AppTest {
         userDao.delete(persistent.getUserId());
     }
     @Test
-    public void tempTest(){
-     userDao.delete(10l);
+    public void tempTest() throws SQLException{
+//     userDao.delete(10l);
+        System.out.println(bookDao.getAllDto());
     }
 }
