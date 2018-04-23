@@ -11,6 +11,11 @@ import com.pvt.services.impl.AuthorServiceImpl;
 import com.pvt.services.impl.BookServiceImpl;
 import com.pvt.services.impl.UserServiceImpl;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.awt.print.Book;
 import java.sql.SQLException;
@@ -18,21 +23,25 @@ import java.sql.SQLException;
 ///**
 // * Unit test for simple App.
 // */
+@ContextConfiguration("/testContext.xml")
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@Transactional()
 public class ServAppTest {
     /**
      * Create the test case
      */
+    @Autowired
+    BookDao bookDao;
+    @Autowired
+    BookService bookService;
+    @Autowired
+    UserService userService;
+
     @Test
     public void serviceTest() throws SQLException {
-        BookService bookService = BookServiceImpl.getInstance();
-        BookDao bookDao = BookDaoImpl.getInstance();
-//        AuthorService authorService = AuthorServiceImpl.getInstance();
-//        System.out.println("fake test");
-        bookDao.openEmTransact();
-        System.out.println(bookService.getAll());
-
-        System.out.println(bookService.get(4l).getTitle());
-        bookDao.closeEmTransact();
-//        System.out.println(authorService.getAll());
+//        System.out.println(bookService.getAllDto());
+//        System.out.println(bookDao.getAll());
+        System.out.println(userService.getAll());
     }
 }

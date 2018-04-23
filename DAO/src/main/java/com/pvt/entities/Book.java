@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@ToString
+@ToString(of = "title")
 @Table (name = "BOOKS")
 public class Book {
     @Id

@@ -17,7 +17,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class BookServiceImpl implements BookService<Book> {
+public class BookServiceImpl implements BookService {
 
     @Autowired
     BookDao bookDao;
