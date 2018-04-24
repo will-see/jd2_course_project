@@ -40,8 +40,9 @@ public class ServAppTest {
 
     @Test
     public void serviceTest() throws SQLException {
-//        System.out.println(bookService.getAllDto());
-//        System.out.println(bookDao.getAll());
-        System.out.println(userService.getAll());
+        System.out.println(bookService.getAllDto());
+//        System.out.println(userService.getAll());
+//        userService.deleteId(11l);
+//        System.out.println(userService.get(11l));
     }
 }

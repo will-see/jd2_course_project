@@ -4,6 +4,7 @@ import com.pvt.entities.User;
 import com.pvt.services.UserService;
 import com.pvt.services.impl.UserServiceImpl;
 import com.pvt.web.command.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class RegisterController implements Controller {
-    UserService userService = UserServiceImpl.getInstance();
+    @Autowired
+    UserService userService;
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -31,7 +33,7 @@ public class RegisterController implements Controller {
 
         if (login != null || password != null || name != null || age != null || sex != null) {
         int intAge = Integer.parseInt(age);
-            User user = userService.create(name, login, password, intAge, sex);
+            // TODO: 23.04.2018      User user = userService.create(name, login, password, intAge, sex);
 //        if (user != null && user.getPassword().equals(Encoder.encode(password))) {
 //        if (user != null && password.equals(user.getPassword())) {
 //            req.getSession().setAttribute("user", user);

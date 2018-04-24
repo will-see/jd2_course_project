@@ -4,6 +4,7 @@ import com.pvt.entities.User;
 import com.pvt.services.UserService;
 import com.pvt.services.impl.UserServiceImpl;
 import com.pvt.web.command.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class LoginController implements Controller {
-    UserService userService = UserServiceImpl.getInstance();
+    @Autowired
+    UserService userService;
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -25,7 +27,7 @@ public class LoginController implements Controller {
             dispatcher.forward(req, resp);
             return;
         }
-        User user = userService.getByLogin(login);
+        User user = (User)userService.getByLogin(login);
 //        if (user != null && user.getPassword().equals(Encoder.encode(password))) {
         if (user != null && password.equals(user.getPassword())) {
             req.getSession().setAttribute("user", user);

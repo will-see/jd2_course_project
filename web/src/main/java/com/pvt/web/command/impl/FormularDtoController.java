@@ -5,6 +5,7 @@ import com.pvt.entities.User;
 import com.pvt.services.FormularService;
 import com.pvt.services.impl.FormularServiceImpl;
 import com.pvt.web.command.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +15,9 @@ import java.io.IOException;
 import java.util.List;
 
 public class FormularDtoController implements Controller {
-    private FormularService formularService = FormularServiceImpl.getInstance();
+
+    @Autowired
+    FormularService formularService;
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

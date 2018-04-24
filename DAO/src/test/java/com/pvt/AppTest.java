@@ -86,7 +86,7 @@ public class AppTest {
     }
     @Test
     public void tempTest() throws SQLException{
-//     userDao.delete(10l);
-        System.out.println(bookDao.getAllDto());
+     userDao.delete(10l);
+        System.out.println(userDao.getAll());
     }
 }

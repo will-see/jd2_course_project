@@ -8,6 +8,7 @@ import com.pvt.entities.User;
 import com.pvt.services.UserService;
 import com.pvt.services.impl.UserServiceImpl;
 import com.pvt.web.command.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,8 +18,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class UsersController implements Controller {
-    private UserService userService = UserServiceImpl.getInstance();
-    private UserDao userDao = UserDaoImpl.getInstance();
+    @Autowired
+    UserService userService;
+    @Autowired
+    UserDao userDao;
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

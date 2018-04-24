@@ -9,6 +9,7 @@ import com.pvt.services.FormularService;
 import com.pvt.services.impl.BookServiceImpl;
 import com.pvt.services.impl.FormularServiceImpl;
 import com.pvt.web.command.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,8 +19,10 @@ import java.io.PrintWriter;
 import java.util.List;
 
 public class GetBookController implements Controller {
-    private BookService bookService = BookServiceImpl.getInstance();
-    private FormularService formularService = FormularServiceImpl.getInstance();
+    @Autowired
+    BookService bookService;
+    @Autowired
+    FormularService formularService;
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -51,7 +54,7 @@ public class GetBookController implements Controller {
             if (formulars.size() == 0) {
                 bookCount--;
                 bookService.updateCount(bookId, bookCount);
-                formularService.createFormular(userId, bookId);
+                // TODO: 23.04.2018             formularService.createFormular(userId, bookId);
             } else {
                 boolean flag = true;
                 for (int i = 0; i < formulars.size(); i++) {
@@ -63,7 +66,7 @@ public class GetBookController implements Controller {
                 if (flag == true) {
                     bookCount--;
                     bookService.updateCount(bookId, bookCount);
-                    formularService.createFormular(userId, bookId);
+                    // TODO: 23.04.2018     formularService.createFormular(userId, bookId);
                 }
             }
         }

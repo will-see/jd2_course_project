@@ -11,6 +11,7 @@ public class Encoder {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] digest = md.digest(pwd.getBytes());
+
             BASE64Encoder encoder = new BASE64Encoder();
             return encoder.encode(digest);
         } catch (NoSuchAlgorithmException e) {
