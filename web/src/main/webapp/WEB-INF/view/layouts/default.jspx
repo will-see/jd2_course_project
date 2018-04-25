@@ -42,7 +42,8 @@
 <com:header-navigation/>
 <div class="jumbotron">
     <div class="container text-center">
-        <c:url var="bodyUrl" value="../books/main.jsp"></c:url>
+        <c:url var="bodyUrl" value="../welcome/body.jsp"></c:url>
+        <!--<c:url var="bodyUrl" value="../books/main.jsp"></c:url>-->
         <c:if test="${not empty sessionScope.pagePath}">
             <c:url var="bodyUrl" value='../${sessionScope.pagePath}'></c:url>
         </c:if>

@@ -26,21 +26,7 @@
                     alert(bookId);
                 }
             </script>
-            <c:forEach var="book" items="${books}" varStatus="status">
-                <tr class="info">
-                    <td class="col-md-1">${book.title}</td>
-                    <div class="col-md-2">
-                        <td class="col-md-1">${book.ganr}</td>
-                        <td class="col-md-1">${book.pages}</td>
-                        <td class="col-md-1">${book.author}</td>
-                        <td id="count${book.bookId}" class="col-md-1">${book.bookCount}</td>
-                        <c:if test="${not empty user}">
-                        <td class="col-md-1"><input id="${book.bookId}" class="btn-primary getBookBtn" type="button" title="get book" value="+"/></td>
-                        </c:if>
-                        <%--<td class="col-md-1"><input id="${product.id}" class="btn-primary reduceProductBtn" type="button" title="Удалить 1 из корзину" value="-"/></td>--%>
-                    </div>
-                </tr>
-            </c:forEach>
+
         </table>
     </div>
 
