@@ -16,13 +16,13 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by yslabko on 019 19.09.16.
+ * Created by w510 on 019 19.09.16.
  */
 @Controller
-@RequestMapping("/products")
+@RequestMapping("/books")
 public class BookController {
 
-    public static final String MAIN = "bookss/main";
+    public static final String MAIN = "books/main";
 
     @Autowired
     private BookService bookService;
@@ -55,23 +55,23 @@ public class BookController {
 //        }
 //    }
 
-    private void validateImage(MultipartFile image) throws IOException {
-        if (!image.getContentType().equals("image/jpeg")) {
-            throw new IOException("Only JPG images accepted");
-        }
-    }
-    private void saveImage(String filename, MultipartFile image) throws IOException {
-        File file = new File("/resources/" + filename);
+//    private void validateImage(MultipartFile image) throws IOException {
+//        if (!image.getContentType().equals("image/jpeg")) {
+//            throw new IOException("Only JPG images accepted");
+//        }
+//    }
+//    private void saveImage(String filename, MultipartFile image) throws IOException {
+//        File file = new File("/resources/" + filename);
 //        FileUtils.writeByteArrayToFile(file, image.getBytes());
-    }
+//    }
 
     private void fillModel(ModelMap model) {
         populatePageName(model);
-        model.addAttribute("product", new Book());
-        model.addAttribute("products", bookService.getAll());
+        model.addAttribute("book", new Book());
+        model.addAttribute("books", bookService.getAll());
     }
 
     private void populatePageName(ModelMap model) {
-        model.addAttribute("currentPageName", "products");
+        model.addAttribute("currentPageName", "books");
     }
 }
