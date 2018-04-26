@@ -2,6 +2,7 @@ package com.pvt.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -13,8 +14,9 @@ import javax.persistence.*;
 @Table(name = "ROLES")
 public class Role {
     @Id
+    @GeneratedValue
     @Column(name = "ROLE_ID")
-    private String roleId;
+    private Long roleId;
     @Column (name = "ROLE_NAME")
     private String roleName;
 
