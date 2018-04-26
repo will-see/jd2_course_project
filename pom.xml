@@ -23,6 +23,7 @@
         <cobertura.version>2.7</cobertura.version>
         <spring.version>5.0.4.RELEASE</spring.version>
         <ehcache.version>2.6.11</ehcache.version>
+        <security.version>4.0.3.RELEASE</security.version>
 
         <spring.data.version>2.0.6.RELEASE</spring.data.version>
         <tiles.version>3.0.5</tiles.version>
@@ -163,7 +164,27 @@
             <artifactId>tiles-template</artifactId>
             <version>${tiles.version}</version>
         </dependency>
-
+        <!-- Spring Security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${security.version}</version>
+        </dependency>
     </dependencies>
     <modules>
         <module>DAO</module>
