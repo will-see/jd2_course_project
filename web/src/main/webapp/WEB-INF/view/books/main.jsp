@@ -18,8 +18,6 @@
                     <%--<th class="col-md-2"><fmt:message bundle="${i18n}" key="books.author"/></th>--%>
                     <th class="col-md-2"><fmt:message bundle="${i18n}" key="books.quantity"/></th>
                     <th class="col-md-1"></th>
-                    <%--<th class="col-md-1">Price</th>--%>
-                    <%--<th class="col-md-1"></th>--%>
             </tr>
             <script>
                 function callAlert(bookId) {
@@ -34,10 +32,9 @@
                         <td class="col-md-1">${book.pages}</td>
                         <%--<td class="col-md-1">${book.author}</td>--%>
                         <td id="count${book.bookId}" class="col-md-1">${book.bookCount}</td>
-                        <c:if test="${not empty user}">
-                        <td class="col-md-1"><input id="${book.bookId}" class="btn-primary getBookBtn" type="button" title="get book" value="+"/></td>
-                        </c:if>
-                        <%--<td class="col-md-1"><input id="${product.id}" class="btn-primary reduceProductBtn" type="button" title="Удалить 1 из корзину" value="-"/></td>--%>
+                        <%--<c:if test="${not empty user}">--%>
+                        <%--<td class="col-md-1"><input id="${book.bookId}" class="btn-primary getBookBtn" type="button" title="get book" value="+"/></td>--%>
+                        <%--</c:if>--%>
                     </div>
                 </tr>
             </c:forEach>
