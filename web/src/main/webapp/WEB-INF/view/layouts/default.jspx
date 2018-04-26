@@ -34,7 +34,7 @@
     </style>
     <fmt:setLocale value="${sessionScope.locale}"/>
     <fmt:setBundle basename="messages" var="i18n"/>
-    <title><fmt:message bundle="${i18n}" key="${title}"/></title>
+    <title><fmt:message bundle="${i18n}" key="books.title"/></title>
 
     <u:icon file="logo.png"/>
 </head>
@@ -43,8 +43,8 @@
 <div class="jumbotron">
     <div class="container text-center">
         <!--<c:url var="bodyUrl" value="../welcome/body.jsp"></c:url>-->
-        <c:url var="bodyUrl" value="../books/main.jsp"></c:url>
-        <!--<c:url var="bodyUrl" value="../books/not_main.jsp"></c:url>-->
+        <!--<c:url var="bodyUrl" value="../books/main.jsp"></c:url>-->
+        <c:url var="bodyUrl" value="../books/not_main.jsp"></c:url>
         <c:if test="${not empty sessionScope.pagePath}">
             <c:url var="bodyUrl" value='../${sessionScope.pagePath}'></c:url>
         </c:if>

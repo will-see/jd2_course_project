@@ -1,19 +1,14 @@
 package com.pvt.web.command;
 
+import com.pvt.dto.BookDto;
 import com.pvt.entities.Book;
 import com.pvt.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by w510 on 019 19.09.16.
@@ -67,8 +62,8 @@ public class BookController {
 
     private void fillModel(ModelMap model) {
         populatePageName(model);
-        model.addAttribute("book", new Book());
-        model.addAttribute("books", bookService.getAll());
+        model.addAttribute("book", new BookDto());
+        model.addAttribute("books", bookService.getAllDto());
     }
 
     private void populatePageName(ModelMap model) {

@@ -28,7 +28,7 @@ public class Book {
     @Column
     private int pages;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn (name = "AUTHOR_ID")
     private Author author;
 

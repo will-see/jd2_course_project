@@ -16,7 +16,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService<User> {
+public class UserServiceImpl implements UserService<User>  {
 
     @Autowired
     UserDao userDao;

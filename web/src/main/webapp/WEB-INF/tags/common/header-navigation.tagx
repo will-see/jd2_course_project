@@ -34,7 +34,7 @@
                                 </li>
                             </c:otherwise>
                         </c:choose>
-                        <c:set var="navName"><fmt:message bundle="${i18n}" key="formular.title"/></c:set>
+                        <c:set var="navName"><spring:message code="formular.title"/></c:set>
                         <c:choose>
                             <c:when test="${pageName eq 'Formular'}">
                                 <li class="active"><a href="#">${navName}</a></li>
@@ -80,7 +80,7 @@
             <c:if test="${not empty user and user.role eq 1}">
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                        <c:set var="navName"><fmt:message bundle="${i18n}" key="books.title"/></c:set>
+                        <c:set var="navName"><spring:message code="books.title"/></c:set>
                         <c:choose>
                             <c:when test="${pageName eq 'Books'}">
                                 <li class="active"><a href="#">${navName}</a></li>

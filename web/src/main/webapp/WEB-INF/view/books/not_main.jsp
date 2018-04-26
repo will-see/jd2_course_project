@@ -13,7 +13,7 @@
         <spring:message code="books.name"/>
         <%--<c:if test="${empty books}"><spring:message code="persons.table.empty"/></c:if><br/>--%>
         <c:forEach var="book1" items="${books}" varStatus="status">
-            <br/>${status.count}.       ${book1.title}
+            <br/>${book1.pages}
         </c:forEach>
     </div>
 

@@ -38,7 +38,6 @@ import static org.springframework.test.util.AssertionErrors.assertEquals;
 public class AppTest {
     /**
      * Create the test case
-     *
      */
     @Autowired
     private UserDao userDao;
@@ -56,27 +55,32 @@ public class AppTest {
 
         author.setName("Pushkin");
         book.setTitle("Lukomor'e");
-        author.setBooks(book);
-        user.setName("Petia");
-        user.setFormulars(new ArrayList<>());
-        user.getFormulars().add(formular);
-
-        Assert.assertNotEquals(user,null);
+        book.setAuthor(author);
+        System.out.println(book.getAuthor().getName());
+//        bookDao.add(book);
+//        author.setBooks(book);
+//        user.setName("Petia");
+//        user.setFormulars(new ArrayList<>());
+//        user.getFormulars().add(formular);
+//        Book persistent = (Book) bookDao.add(book);
+        bookDao.add(new Book("lukomore","skazka",100, author,10));
+//        Assert.assertNotEquals(user,null);
 
 //        System.out.println(user);
 //        System.out.println(formular);
     }
+
     @Test
     public void addUser() throws SQLException {
         User user = new User();
         user.setName("TestUser");
         user.setAge(30);
         user.setLogin("TestLogin");
-        User persistent =(User) userDao.add(user);
+        User persistent = (User) userDao.add(user);
         assertNotNull(persistent.getUserId());
-        persistent =(User) userDao.get(persistent.getUserId());
+        persistent = (User) userDao.get(persistent.getUserId());
         assertEquals("User not persist", user, persistent);
-        List<User> allUsers=userDao.getAll();
+        List<User> allUsers = userDao.getAll();
 
         for (User allUser : allUsers) {
             System.out.println(allUser);
@@ -84,9 +88,10 @@ public class AppTest {
         System.out.println(userDao.getByLogin("TestLogin"));
         userDao.delete(persistent.getUserId());
     }
+
     @Test
-    public void tempTest() throws SQLException{
-     userDao.delete(10l);
+    public void tempTest() throws SQLException {
+        userDao.delete(11l);
         System.out.println(userDao.getAll());
     }
 }
