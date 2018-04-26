@@ -13,6 +13,7 @@ import com.pvt.services.impl.UserServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,7 @@ import java.sql.SQLException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional()
+//@Commit
 public class ServAppTest {
     /**
      * Create the test case
@@ -40,10 +42,10 @@ public class ServAppTest {
 
     @Test
     public void serviceTest() throws SQLException {
-//        System.out.println(bookService.getAllDto());
+        System.out.println(bookService.getAllDto());
 //        System.out.println(bookService.getAll());
 //        System.out.println(userService.getAll());
-        userService.deleteId(11l);
+//        userService.deleteId(13l);
 //        System.out.println(userService.get(11l));
     }
 }

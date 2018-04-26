@@ -32,9 +32,7 @@
                         <td class="col-md-1">${book.pages}</td>
                         <%--<td class="col-md-1">${book.author}</td>--%>
                         <td id="count${book.bookId}" class="col-md-1">${book.bookCount}</td>
-                        <%--<c:if test="${not empty user}">--%>
-                        <%--<td class="col-md-1"><input id="${book.bookId}" class="btn-primary getBookBtn" type="button" title="get book" value="+"/></td>--%>
-                        <%--</c:if>--%>
+                        <td class="col-md-1"><input id="${book.bookId}" class="btn-primary getBookBtn" type="button" title="get book" value="+"/></td>
                     </div>
                 </tr>
             </c:forEach>

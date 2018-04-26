@@ -34,7 +34,7 @@ import static org.springframework.test.util.AssertionErrors.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional()
-//@Commit
+@Commit
 public class AppTest {
     /**
      * Create the test case
@@ -71,6 +71,27 @@ public class AppTest {
     }
 
     @Test
+    public void bookAddTest(){
+        Book book = new Book();
+        book.setTitle("Lukomor'e");
+        book.setPages(100);
+        Author author = new Author();
+        author.setName("Pushkin");
+        book.setAuthor(author);
+        Book persistent = (Book) bookDao.add(book);
+        assertNotNull(persistent.getBookId());
+        persistent = (Book) bookDao.get(persistent.getBookId());
+        assertEquals("User not persist", book, persistent);
+    }
+
+    @Test
+    public void bookAddOtherTest(){
+        Author author = new Author();
+        author.setName("Pushkin");
+        bookDao.add(new Book("lukomore","skazka",100, author,10));
+    }
+
+    @Test
     public void addUser() throws SQLException {
         User user = new User();
         user.setName("TestUser");
@@ -85,13 +106,13 @@ public class AppTest {
         for (User allUser : allUsers) {
             System.out.println(allUser);
         }
-        System.out.println(userDao.getByLogin("TestLogin"));
-        userDao.delete(persistent.getUserId());
+//        System.out.println(userDao.getByLogin("TestLogin"));
+//        userDao.delete(persistent.getUserId());
     }
 
-    @Test
-    public void tempTest() throws SQLException {
-        userDao.delete(11l);
-        System.out.println(userDao.getAll());
-    }
+//    @Test
+//    public void tempTest() throws SQLException {
+//        userDao.delete(11l);
+//        System.out.println(userDao.getAll());
+//    }
 }

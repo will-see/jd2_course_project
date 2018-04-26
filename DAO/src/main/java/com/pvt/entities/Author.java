@@ -27,5 +27,5 @@ public class Author {
     private String country;
 
     @OneToOne(mappedBy = "author", cascade = CascadeType.ALL)
-    private Book books;
+    private Book book;
 }
