@@ -5,6 +5,7 @@ import com.pvt.dto.BookDto;
 import com.pvt.entities.Book;
 import org.hibernate.Session;
 import org.hibernate.transform.Transformers;
+import org.hibernate.type.StandardBasicTypes;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -38,11 +39,19 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao<Book> {
     @Override
 //    @SuppressWarnings("all")
     public List<BookDto> getAllDto() throws SQLException {
-//        Query query = getEm().createNativeQuery("SELECT bookId, b.title, ganr,pages, a.name, bookCount FROM books b JOIN authors a ON b.AUTHOR_ID = a.authorId order by bookId;");
         EntityManager em = getEm();
         Session unwrap = em.unwrap(Session.class);
-        List<BookDto> bookDto = unwrap.createNativeQuery("SELECT bookId, b.title, ganr,pages, a.name, bookCount FROM books b JOIN authors a ON b.AUTHOR_ID = a.authorId order by bookId;")
-                .setResultTransformer(Transformers.aliasToBean(BookDto.class)).getResultList();
+        List<BookDto> bookDto = unwrap.createSQLQuery("SELECT bookId, b.title, ganr,pages, a.name, bookCount FROM books b JOIN authors a ON b.AUTHOR_ID = a.authorId order by bookId;")
+//                .addScalar("bookId", StandardBasicTypes.LONG)
+                .addScalar("title", StandardBasicTypes.STRING)
+                .addScalar("ganr", StandardBasicTypes.STRING)
+                .addScalar("pages", StandardBasicTypes.INTEGER)
+//                .addScalar("a.name", StandardBasicTypes.STRING)
+//                .addEntity("author", Author.class)
+//                .addJoin("authorId","AUTHOR_ID")
+                .addScalar("bookCount", StandardBasicTypes.INTEGER)
+                .setResultTransformer(Transformers.aliasToBean(BookDto.class))
+                .list();
         return bookDto;
     }
 }
