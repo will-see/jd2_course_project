@@ -3,8 +3,11 @@ package com.pvt.DAO.impl;
 import com.pvt.DAO.BookDao;
 import com.pvt.dto.BookDto;
 import com.pvt.entities.Book;
+import org.hibernate.Session;
+import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
@@ -32,10 +35,14 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao<Book> {
         Query query = getEm().createQuery("from Book ");
         return (List<Book>) query.getResultList();
     }
-
     @Override
+//    @SuppressWarnings("all")
     public List<BookDto> getAllDto() throws SQLException {
-        Query query = getEm().createNativeQuery("SELECT bookId, b.title, ganr,pages, a.name, bookCount FROM books b JOIN authors a ON b.AUTHOR_ID = a.authorId order by bookId;");
-        return query.getResultList();
+//        Query query = getEm().createNativeQuery("SELECT bookId, b.title, ganr,pages, a.name, bookCount FROM books b JOIN authors a ON b.AUTHOR_ID = a.authorId order by bookId;");
+        EntityManager em = getEm();
+        Session unwrap = em.unwrap(Session.class);
+        List<BookDto> bookDto = unwrap.createNativeQuery("SELECT bookId, b.title, ganr,pages, a.name, bookCount FROM books b JOIN authors a ON b.AUTHOR_ID = a.authorId order by bookId;")
+                .setResultTransformer(Transformers.aliasToBean(BookDto.class)).getResultList();
+        return bookDto;
     }
 }

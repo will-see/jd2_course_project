@@ -62,8 +62,8 @@ public class BookController {
 
     private void fillModel(ModelMap model) {
         populatePageName(model);
-        model.addAttribute("book", new Book());
-        model.addAttribute("books", bookService.getAll());
+        model.addAttribute("book", new BookDto());
+        model.addAttribute("books", bookService.getAllDto());
     }
 
     private void populatePageName(ModelMap model) {

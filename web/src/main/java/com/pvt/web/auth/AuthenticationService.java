@@ -30,7 +30,7 @@ public class AuthenticationService implements UserDetailsService {
             throw new UsernameNotFoundException("Username not found");
         }
         return new MvcUser(user. getName(), user.getLogin(), user.getPassword(),
-                isUserActive(user.getRole().toString()), true, true, true, getGrantedAuthorities(user));
+                isUserActive(user.getRole().getRoleName()), true, true, true, getGrantedAuthorities(user));
     }
 
     private boolean isUserActive(String status) {
