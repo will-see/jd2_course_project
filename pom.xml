@@ -165,6 +165,11 @@
             <artifactId>tiles-template</artifactId>
             <version>${tiles.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-el</artifactId>
+            <version>${tiles.version}</version>
+        </dependency>
         <!-- Spring Security -->
         <dependency>
             <groupId>org.springframework.security</groupId>

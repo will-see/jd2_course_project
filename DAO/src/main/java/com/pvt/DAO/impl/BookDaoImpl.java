@@ -37,16 +37,16 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao<Book> {
         return (List<Book>) query.getResultList();
     }
     @Override
-//    @SuppressWarnings("all")
+    @SuppressWarnings("all")
     public List<BookDto> getAllDto() throws SQLException {
         EntityManager em = getEm();
         Session unwrap = em.unwrap(Session.class);
-        List<BookDto> bookDto = unwrap.createSQLQuery("SELECT bookId, b.title, ganr,pages, a.name, bookCount FROM books b JOIN authors a ON b.AUTHOR_ID = a.authorId order by bookId;")
-//                .addScalar("bookId", StandardBasicTypes.LONG)
+        List<BookDto> bookDto = unwrap.createSQLQuery("SELECT bookId, title, ganr,pages, a.name as author, bookCount FROM books b JOIN authors a ON b.AUTHOR_ID = a.authorId order by bookId;")
+                .addScalar("bookId", StandardBasicTypes.LONG)
                 .addScalar("title", StandardBasicTypes.STRING)
                 .addScalar("ganr", StandardBasicTypes.STRING)
                 .addScalar("pages", StandardBasicTypes.INTEGER)
-//                .addScalar("a.name", StandardBasicTypes.STRING)
+                .addScalar("author", StandardBasicTypes.STRING)
 //                .addEntity("author", Author.class)
 //                .addJoin("authorId","AUTHOR_ID")
                 .addScalar("bookCount", StandardBasicTypes.INTEGER)

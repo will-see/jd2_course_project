@@ -28,10 +28,10 @@ public class BookController {
         return MAIN;
     }
 
-    @RequestMapping(value = "/file", method = RequestMethod.POST)
-    public String processFile(MultipartFile file) {
-        return MAIN;
-    }
+//    @RequestMapping(value = "/file", method = RequestMethod.POST)
+//    public String processFile(MultipartFile file) {
+//        return MAIN;
+//    }
 
 //    @RequestMapping(value = "/addBooks", method = RequestMethod.POST)
 //    @ResponseStatus(HttpStatus.OK)

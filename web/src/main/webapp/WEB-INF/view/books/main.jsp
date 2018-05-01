@@ -15,7 +15,7 @@
                 <th class="col-md-2"> <fmt:message bundle="${i18n}" key="books.name"/></th>
                     <th class="col-md-2"><fmt:message bundle="${i18n}" key="books.ganr"/></th>
                     <th class="col-md-2"><fmt:message bundle="${i18n}" key="books.pages"/></th>
-                    <%--<th class="col-md-2"><fmt:message bundle="${i18n}" key="books.author"/></th>--%>
+                    <th class="col-md-2"><fmt:message bundle="${i18n}" key="books.author"/></th>
                     <th class="col-md-2"><fmt:message bundle="${i18n}" key="books.quantity"/></th>
                     <th class="col-md-1"></th>
             </tr>
@@ -30,7 +30,7 @@
                     <div class="col-md-2">
                         <td class="col-md-1">${book.ganr}</td>
                         <td class="col-md-1">${book.pages}</td>
-                        <%--<td class="col-md-1">${book.author}</td>--%>
+                        <td class="col-md-1">${book.author}</td>
                         <td id="count${book.bookId}" class="col-md-1">${book.bookCount}</td>
                         <td class="col-md-1"><input id="${book.bookId}" class="btn-primary getBookBtn" type="button" title="get book" value="+"/></td>
                     </div>
