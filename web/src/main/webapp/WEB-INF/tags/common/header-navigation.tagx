@@ -73,25 +73,14 @@
                     </sec:authorize>
                     <sec:authorize access="permitAll()">
                         <c:url var="loginUrl" value="/login" />
-                        <form class="navbar-form navbar-right" action="${loginUrl}" method="post">
-                            <div class="form-group">
-                                <c:if test="${param.error != null}">
-                                    <div class="text-danger"><p>Invalid username and password.</p></div>
-                                </c:if>
-                                <div class="input-group input-sm">
-                                    <input type="text" class="form-control" id="login" name="login" placeholder="Enter Login" required="required" maxlength="18"><jsp:text/></input>
-                                </div>
-                                <div class="input-group input-sm">
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required="required" maxlength="12"><jsp:text/></input>
-                                    <div class="input-group-btn">
-                                        <button class="btn btn-default" type="submit">
-                                            <i class="glyphicon glyphicon-log-in"><jsp:text/></i> Log In
-                                        </button>
-                                    </div>
-                                </div>
-                                <input type="hidden" name="${_csrf.parameterName}"  value="${_csrf.token}"><jsp:text/></input>
-                            </div>
-                        </form>
+                        <nav class="navbar navbar-inverse navbar-right">
+                            <ul class="nav navbar-nav">
+                                <c:url var="logout" value="/login"/>
+                                <li class="active">
+                                    <a href="${loginUrl}" id="logInButton"><span class="glyphicon glyphicon-log-in"><jsp:text/></span> Log In</a>
+                                </li>
+                            </ul>
+                        </nav>
                     </sec:authorize>
                 </div>
         </div>
