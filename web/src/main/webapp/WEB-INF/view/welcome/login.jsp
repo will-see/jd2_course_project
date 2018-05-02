@@ -10,7 +10,7 @@
         <td align="center" valign="center">
 
             <sec:authorize access="isAnonymous()">
-                <c:url var="loginUrl" value="/loginProcess"/>
+                <c:url var="loginUrl" value="/login"/>
                 <form action="${loginUrl}" method="post">
 
                     <div>
