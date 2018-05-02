@@ -20,12 +20,12 @@
         <put-attribute name="body" value="/WEB-INF/view/books/main.jsp"/>
     </definition>
 
-    <definition name="loginPage" extends="default">
-        <put-attribute name="title" value="Login"/>
+    <definition name="login" extends="default">
+        <put-attribute name="title" value="Login Page"/>
         <put-attribute name="body" value="/WEB-INF/view/welcome/login.jsp"/>
     </definition>
 
-    <definition name="regPage" extends="default">
+    <definition name="register" extends="default">
         <put-attribute name="title" value="Register Page"/>
         <put-attribute name="body" value="/WEB-INF/view/welcome/register.jsp"/>
     </definition>

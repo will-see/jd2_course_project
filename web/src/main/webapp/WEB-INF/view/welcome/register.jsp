@@ -3,7 +3,7 @@
 
 <div class="container text-center">
     <div class="error">${errorMsg}</div>
-    <form action="${pageContext.request.contextPath}/register" method="post" accept-charset="UTF-8">
+    <form action="${pageContext.request.contextPath}/registerProcess" method="post" accept-charset="UTF-8">
         <%--<fmt:setLocale value="${sessionScope.locale}"/>--%>
         <%--<fmt:setBundle basename="messages" var="i18n"/>--%>
         <br>
