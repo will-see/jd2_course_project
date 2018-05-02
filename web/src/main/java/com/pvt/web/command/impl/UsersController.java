@@ -40,12 +40,9 @@ public class UsersController implements Controller {
                 User fakeUser = new User();
                 fakeUser.setUserId(Long.parseLong(id));
                 fakeUser.setRole(role);
-//                User fakeUser = userService.get(Long.parseLong(id));
                 if (role.getRoleName().equalsIgnoreCase("reader")) {
-//                    fakeUser.setRole(role.setRoleId("1"));
                     userService.update(fakeUser);
                 } else {
-//                    fakeUser.setRole("0");
                     userService.update(fakeUser);
                 }
             } catch (Exception e) {

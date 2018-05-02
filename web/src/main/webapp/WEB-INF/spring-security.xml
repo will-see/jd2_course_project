@@ -10,10 +10,10 @@
     <http auto-config="true">
         <intercept-url pattern="/" access="permitAll"/>
         <intercept-url pattern="/welcome" access="permitAll"/>
-        <intercept-url pattern="/formular" access="permitAll"/>
-        <intercept-url pattern="/users" access="permitAll"/>
+        <intercept-url pattern="/formular" access="isAuthenticated()"/>
+        <!--<intercept-url pattern="/users/page" access="hasRole('ROLE_ADMIN')"/>-->
+        <intercept-url pattern="/users/page" access="isAuthenticated()"/>
         <intercept-url pattern="/books/page" access="permitAll"/>
-        <intercept-url pattern="/persons/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_GRAND_USER')"/>
         <!--<logout invalidate-session="true" logout-url="logout" logout-success-url="/login"/>-->
         <form-login login-page="/login"
                     username-parameter="login"

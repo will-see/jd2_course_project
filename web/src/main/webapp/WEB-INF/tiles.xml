@@ -30,12 +30,12 @@
         <put-attribute name="body" value="/WEB-INF/view/welcome/register.jsp"/>
     </definition>
 
-    <definition name="users" extends="default">
+    <definition name="users/main" extends="default">
         <put-attribute name="title" value="Users Page"/>
         <put-attribute name="body" value="/WEB-INF/view/users/main.jsp"/>
     </definition>
 
-    <definition name="formular" extends="default">
+    <definition name="formular/main" extends="default">
         <put-attribute name="title" value="Formular Page"/>
         <put-attribute name="body" value="/WEB-INF/view/formular/main.jsp"/>
     </definition>

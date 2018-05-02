@@ -47,8 +47,6 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao<Book> {
                 .addScalar("ganr", StandardBasicTypes.STRING)
                 .addScalar("pages", StandardBasicTypes.INTEGER)
                 .addScalar("author", StandardBasicTypes.STRING)
-//                .addEntity("author", Author.class)
-//                .addJoin("authorId","AUTHOR_ID")
                 .addScalar("bookCount", StandardBasicTypes.INTEGER)
                 .setResultTransformer(Transformers.aliasToBean(BookDto.class))
                 .list();

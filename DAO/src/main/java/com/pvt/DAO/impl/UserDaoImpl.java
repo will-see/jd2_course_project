@@ -1,11 +1,16 @@
 package com.pvt.DAO.impl;
 
 import com.pvt.DAO.UserDao;
+import com.pvt.dto.BookDto;
 import com.pvt.dto.UsersDto;
 import com.pvt.entities.User;
 import lombok.NoArgsConstructor;
+import org.hibernate.Session;
+import org.hibernate.transform.Transformers;
+import org.hibernate.type.StandardBasicTypes;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -21,7 +26,7 @@ import java.util.List;
 @Repository
 public class UserDaoImpl extends BaseDao<User> implements UserDao<User> {
 
-    public UserDaoImpl(){
+    public UserDaoImpl() {
         super();
         clazz = User.class;
     }
@@ -48,12 +53,21 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao<User> {
     }
 
     @Override
+    @SuppressWarnings("all")
     public List<UsersDto> getAllDto() throws SQLException {
-        Query query = getEm().createNativeQuery("SELECT users.userId, name, login,age, sex,role, count(bookId)\n" +
-                "FROM users JOIN roles ON users.id_role = roles.id_role\n" +
-                "LEFT JOIN formular ON users.userId = formular.userId\n" +
-                "GROUP BY NAME\n" +
-                "ORDER BY users.userId;");
-        return (List<UsersDto>) query.getResultList();
+        EntityManager em = getEm();
+        Session unwrap = em.unwrap(Session.class);
+        List<UsersDto> usersDto = unwrap.createSQLQuery("SELECT users.USER_ID as userId, FIRST_NAME as name, LOGIN as login, AGE as age, SEX as sex, roles.ROLE_NAME AS role, COUNT(bookId) AS booksGot FROM users  JOIN roles ON users.ROLE_ID = roles.ROLE_ID  LEFT JOIN formulars ON users.USER_ID = formulars.USER_ID GROUP BY FIRST_NAME ORDER BY userId;")
+                .addScalar("userId", StandardBasicTypes.LONG)
+                .addScalar("name", StandardBasicTypes.STRING)
+                .addScalar("login", StandardBasicTypes.STRING)
+                .addScalar("age", StandardBasicTypes.INTEGER)
+                .addScalar("sex", StandardBasicTypes.STRING)
+                .addScalar("role", StandardBasicTypes.STRING)
+                .addScalar("booksGot", StandardBasicTypes.INTEGER)
+                .setResultTransformer(Transformers.aliasToBean(UsersDto.class))
+                .list();
+        return usersDto;
     }
+
 }

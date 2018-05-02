@@ -23,7 +23,7 @@
         <%--<th width=120><fmt:message bundle="${i18n}" key="users.booksGot"/></th>--%>
     </tr>
 
-    <c:forEach var="users" items="${usersDto}" varStatus="status">
+    <c:forEach var="users" items="${users}" varStatus="status">
         <tr>
             <%--<td>${status.index +1}</td>--%>
             <td>${users.userId}</td>
@@ -32,21 +32,21 @@
             <td>${users.age}</td>
             <td>${users.sex}</td>
             <td>${users.role}</td>
-                <td>${users.booksGot}</td>
-                <td>
-                <form action="frontController?command=formular" method="post">
-                <p><input type="hidden" name="userId" value=${users.userId}>
-                <input type="submit" value="view">
-                </form>
-                </td>
-                <td>
-                <form action="frontController?command=users" method="post">
-                <p><input type="hidden" name="userId" value=${users.userId}>
-                <p><input type="hidden" name="role" value=${users.role}>
-                <p><input type="hidden" name="flag" value="change">
-                <input type="submit" value="change role">
-                </form>
-                </td>
+                <%--<td>${users.booksGot}</td>--%>
+                <%--<td>--%>
+                <%--<form action="frontController?command=formular" method="post">--%>
+                <%--<p><input type="hidden" name="userId" value=${users.userId}>--%>
+                <%--<input type="submit" value="view">--%>
+                <%--</form>--%>
+                <%--</td>--%>
+                <%--<td>--%>
+                <%--<form action="frontController?command=users" method="post">--%>
+                <%--<p><input type="hidden" name="userId" value=${users.userId}>--%>
+                <%--<p><input type="hidden" name="role" value=${users.role}>--%>
+                <%--<p><input type="hidden" name="flag" value="change">--%>
+                <%--<input type="submit" value="change role">--%>
+                <%--</form>--%>
+                <%--</td>--%>
         </tr>
     </c:forEach>
     <%--<c:forEach var="book" items="${books}" varStatus="status">--%>

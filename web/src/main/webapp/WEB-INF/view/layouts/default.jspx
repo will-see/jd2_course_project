@@ -35,7 +35,7 @@
         }
     </style>
     <title><spring:message code="users.title"/></title>
-    <u:icon file="mvc-page-title.png"/>
+    <u:icon file="logo.png"/>
 </head>
 <body>
 <com:header-navigation/>

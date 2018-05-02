@@ -45,6 +45,19 @@
                                 </li>
                             </c:otherwise>
                         </c:choose>
+                        <sec:authorize access="isAuthenticated()">
+                        <c:set var="navName"><spring:message code="users.title"/></c:set>
+                        <c:choose>
+                            <c:when test="${pageName eq 'Users'}">
+                                <li class="active"><a href="#">${navName}</a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li>
+                                    <a href="${pageContext.request.contextPath}/users/page">${navName}</a>
+                                </li>
+                            </c:otherwise>
+                        </c:choose>
+                        </sec:authorize>
                         <c:set var="locale" value="${request.LOCALE.language}"/>
                         <c:if test="${locale eq 'en'}">
                             <li class="active"><a href="#"><spring:message code="header.locale.ru"/></a></li>
@@ -71,7 +84,7 @@
                             </ul>
                         </nav>
                     </sec:authorize>
-                    <sec:authorize access="permitAll()">
+                    <sec:authorize access="isAnonymous()">
                         <c:url var="loginUrl" value="/login" />
                         <nav class="navbar navbar-inverse navbar-right">
                             <ul class="nav navbar-nav">
