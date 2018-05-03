@@ -2,11 +2,13 @@ package com.pvt;
 
 import com.pvt.DAO.AuthorDao;
 import com.pvt.DAO.BookDao;
+import com.pvt.DAO.FormularDao;
 import com.pvt.DAO.UserDao;
 import com.pvt.DAO.impl.AuthorDaoImpl;
 import com.pvt.DAO.impl.BookDaoImpl;
 import com.pvt.DAO.impl.UserDaoImpl;
 import com.pvt.dto.BookDto;
+import com.pvt.dto.FormularDto;
 import com.pvt.entities.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -43,6 +45,8 @@ public class AppTest {
     private UserDao userDao;
     @Autowired
     private BookDao bookDao;
+    @Autowired
+    private FormularDao formularDao;
 
     @Test
     public void EntityTest() {
@@ -89,6 +93,11 @@ public class AppTest {
         Author author = new Author();
         author.setName("Pushkin");
         bookDao.add(new Book("lukomore","skazka",100, author,10));
+    }
+
+    @Test
+    public void FormularDtoTest() throws SQLException{
+        formularDao.getUserBooksInFormular(21l);
     }
 
     @Test

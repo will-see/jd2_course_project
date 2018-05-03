@@ -63,7 +63,7 @@ public class FormularController {
         populatePageName(model);
         model.addAttribute("userId", getUserId());
         model.addAttribute("formular", new FormularDto());
-        model.addAttribute("formulars", formularService.getByUserId(userId));
+        model.addAttribute("formulars", formularService.getUserBooksInFormular(userId));
     }
 
     private long getUserId() {
