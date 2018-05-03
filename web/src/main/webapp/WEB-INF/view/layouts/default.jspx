@@ -34,7 +34,7 @@
             padding: 25px;
         }
     </style>
-    <title><spring:message code="users.title"/></title>
+    <title><spring:message code="library.title"/></title>
     <u:icon file="logo.png"/>
 </head>
 <body>

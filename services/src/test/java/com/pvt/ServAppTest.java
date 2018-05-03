@@ -5,6 +5,7 @@ import com.pvt.entities.Book;
 import com.pvt.entities.Role;
 import com.pvt.entities.User;
 import com.pvt.services.BookService;
+import com.pvt.services.FormularService;
 import com.pvt.services.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,6 +35,8 @@ public class ServAppTest {
     BookService bookService;
     @Autowired
     UserService userService;
+    @Autowired
+    FormularService formularService;
 
     @Test
     public void fillBaseTest() {
@@ -58,5 +61,9 @@ public class ServAppTest {
     @Test
     public void serviceTest() throws SQLException {
         System.out.println(bookService.getAllDto());
+    }
+    @Test
+    public void serviceFormularDtoTest() throws SQLException {
+        System.out.println(formularService.getByUserId(21l));
     }
 }

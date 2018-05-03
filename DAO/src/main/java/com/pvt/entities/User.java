@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "USERS")
-@ToString(exclude = "role")
+@ToString(exclude = {"role", "formulars"})
 public class User {
     @Id
     @GeneratedValue

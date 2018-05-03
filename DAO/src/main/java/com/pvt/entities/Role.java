@@ -1,9 +1,6 @@
 package com.pvt.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Generated;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,6 +9,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "ROLES")
+@ToString(of = "rolename")
 public class Role {
     @Id
     @GeneratedValue

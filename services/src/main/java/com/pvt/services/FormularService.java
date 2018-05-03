@@ -8,5 +8,5 @@ import java.util.List;
 public interface FormularService<T>extends Service<T> {
 
     List<T> getByUserId(long userId);
-    List<FormularDto> getUserFormular(long userId);
+    List<FormularDto> getUserBooksInFormular(long userId);
 }

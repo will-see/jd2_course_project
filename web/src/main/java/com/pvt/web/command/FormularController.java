@@ -6,14 +6,18 @@ import com.pvt.entities.Formular;
 import com.pvt.entities.User;
 import com.pvt.services.BookService;
 import com.pvt.services.FormularService;
+import com.pvt.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,13 +30,17 @@ import java.util.List;
  * Created by w510 on 019 19.09.16.
  */
 @Controller
-@RequestMapping("/formulars")
+@RequestMapping("/formular")
 public class FormularController {
 
-    public static final String MAIN = "formulars/main";
+    long userId;
+
+    public static final String MAIN = "formular/main";
 
     @Autowired
     private FormularService formularService;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/page", method = RequestMethod.GET)
     public String getBooks(ModelMap map) {
@@ -40,14 +48,37 @@ public class FormularController {
         return MAIN;
     }
 
+//    public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+//        User user = (User) req.getSession().getAttribute("user");
+//        userId = user.getUserId();
+//    }
+
+//    public ModelAndView getUserId(HttpServletRequest request, HttpServletResponse response,
+//                                  @ModelAttribute("user") User user) {
+//        return new ModelAndView("welcome", "name", user.getName());
+//    }
+
+
     private void fillModel(ModelMap model) {
         populatePageName(model);
-        model.addAttribute("formular", new Formular());
-//        model.addAttribute("formulars", formularService.getByUserId());
+        model.addAttribute("userId", getUserId());
+        model.addAttribute("formular", new FormularDto());
+        model.addAttribute("formulars", formularService.getByUserId(userId));
     }
 
+    private long getUserId() {
+        String userName;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            userName = ((UserDetails) principal).getUsername();
+        } else {
+            userName = principal.toString();
+        }
+        User currentUser = (User)userService.getByLogin(userName);
+        return currentUser.getUserId();
+    }
 
     private void populatePageName(ModelMap model) {
-        model.addAttribute("currentPageName", "books");
+        model.addAttribute("currentPageName", "formular");
     }
 }

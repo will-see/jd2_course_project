@@ -1,11 +1,6 @@
 package com.pvt.services.impl;
 
-import com.pvt.DAO.BookDao;
 import com.pvt.DAO.FormularDao;
-import com.pvt.DAO.ItemDao;
-import com.pvt.DAO.impl.BookDaoImpl;
-import com.pvt.DAO.impl.FormularDaoImpl;
-import com.pvt.DAO.impl.ItemDaoImpl;
 import com.pvt.dto.FormularDto;
 import com.pvt.entities.Formular;
 import com.pvt.services.FormularService;
@@ -70,9 +65,9 @@ public class FormularServiceImpl implements FormularService<Formular> {
     }
 
     @Override
-    public List<FormularDto> getUserFormular(long userId) {
+    public List<FormularDto> getUserBooksInFormular(long userId) {
         try {
-            return formularDao.getUserFormular(userId);
+            return formularDao.getUserBooksInFormular(userId);
         } catch (SQLException e) {
             throw new ServiceException("Error getting User Formular by userId" + userId);
         }

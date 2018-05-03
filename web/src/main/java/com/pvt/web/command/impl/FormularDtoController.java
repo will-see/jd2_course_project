@@ -3,7 +3,6 @@ package com.pvt.web.command.impl;
 import com.pvt.dto.FormularDto;
 import com.pvt.entities.User;
 import com.pvt.services.FormularService;
-import com.pvt.services.impl.FormularServiceImpl;
 import com.pvt.web.command.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,10 +23,10 @@ public class FormularDtoController implements Controller {
         User user = (User)req.getSession().getAttribute("user");
         String id = req.getParameter("userId");
         if (id!=null){
-            List<FormularDto> formularDto = formularService.getUserFormular(Long.parseLong(id));
+            List<FormularDto> formularDto = formularService.getUserBooksInFormular(Long.parseLong(id));
             req.setAttribute("formularDto", formularDto);
         }else {
-            List<FormularDto> formularDto = formularService.getUserFormular(user.getUserId());
+            List<FormularDto> formularDto = formularService.getUserBooksInFormular(user.getUserId());
             req.setAttribute("formularDto", formularDto);
         }
 
