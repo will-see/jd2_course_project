@@ -10,12 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import java.io.Serializable;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -36,9 +31,11 @@ public class FormularDaoImpl extends BaseDao<Formular> implements FormularDao<Fo
     public List<FormularDto> getUserBooksInFormular(long userId) throws SQLException {
         EntityManager em = getEm();
         Session unwrap = em.unwrap(Session.class);
-        List<FormularDto> formularDto = unwrap.createSQLQuery("SELECT books.title as name, authors.name author FROM books JOIN formulars ON formulars.bookId=books.bookId JOIN authors ON books.AUTHOR_ID = authors.authorId WHERE USER_ID=?")
-                .addScalar("name", StandardBasicTypes.STRING)
-                .addScalar("author", StandardBasicTypes.INTEGER)
+
+        List<FormularDto> formularDto = unwrap.createSQLQuery("SELECT books.title as name, authors.name author FROM books JOIN formulars ON formulars.bookId=books.bookId JOIN authors ON books.AUTHOR_ID = authors.authorId WHERE USER_ID=(:values)")
+                .setInteger("values",(int)userId)
+//                .addScalar("name", StandardBasicTypes.STRING)
+//                .addScalar("author", StandardBasicTypes.STRING)
                 .setResultTransformer(Transformers.aliasToBean(FormularDto.class))
                 .list();
         return formularDto;

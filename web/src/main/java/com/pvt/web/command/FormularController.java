@@ -33,7 +33,7 @@ import java.util.List;
 @RequestMapping("/formular")
 public class FormularController {
 
-    long userId;
+//    long userId;
 
     public static final String MAIN = "formular/main";
 
@@ -48,22 +48,11 @@ public class FormularController {
         return MAIN;
     }
 
-//    public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-//        User user = (User) req.getSession().getAttribute("user");
-//        userId = user.getUserId();
-//    }
-
-//    public ModelAndView getUserId(HttpServletRequest request, HttpServletResponse response,
-//                                  @ModelAttribute("user") User user) {
-//        return new ModelAndView("welcome", "name", user.getName());
-//    }
-
-
     private void fillModel(ModelMap model) {
         populatePageName(model);
-        model.addAttribute("userId", getUserId());
+        long userId = getUserId();
         model.addAttribute("formular", new FormularDto());
-        model.addAttribute("formulars", formularService.getUserBooksInFormular(userId));
+        model.addAttribute("formularDto", formularService.getUserBooksInFormular(userId));
     }
 
     private long getUserId() {
