@@ -13,7 +13,7 @@ function getBook(element) {
     console.log(json);
     $.ajax({
         type: 'get',
-        url: contextUrl + '/frontController?command=getBook&bookId=' + bookId
+        url: contextUrl + '/books/getBook' + bookId
     }).done(function (data) {
         $('#count'+bookId).text(data);
     }).fail(function (data) {

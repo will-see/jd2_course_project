@@ -14,9 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.RequestDispatcher;
@@ -33,7 +31,7 @@ import java.util.List;
 @RequestMapping("/formular")
 public class FormularController {
 
-//    long userId;
+    private String globalUserId;
 
     public static final String MAIN = "formular/main";
 
@@ -48,11 +46,26 @@ public class FormularController {
         return MAIN;
     }
 
+//    @RequestMapping(value = "/page", method = RequestMethod.GET)
+//    public String getUserIdFromJsp(@RequestParam String userId) {
+//        globalUserId = userId;
+//        return MAIN;
+//    }
+
     private void fillModel(ModelMap model) {
         populatePageName(model);
-        long userId = getUserId();
         model.addAttribute("formular", new FormularDto());
-        model.addAttribute("formularDto", formularService.getUserBooksInFormular(userId));
+        if (globalUserId != null) {
+            model.addAttribute("formularDto", formularService.getUserBooksInFormular(Long.parseLong(globalUserId)));
+//            List<FormularDto> formularDto = formularService.getUserBooksInFormular(Long.parseLong(globalUserId));
+//            req.setAttribute("formularDto", formularDto);
+        } else {
+            long userId = getUserId();
+            model.addAttribute("formularDto", formularService.getUserBooksInFormular(userId));
+//            List<FormularDto> formularDto = formularService.getUserBooksInFormular(user.getUserId());
+//            req.setAttribute("formularDto", formularDto);
+//            userId = getUserId();
+        }
     }
 
     private long getUserId() {
@@ -63,7 +76,7 @@ public class FormularController {
         } else {
             userName = principal.toString();
         }
-        User currentUser = (User)userService.getByLogin(userName);
+        User currentUser = (User) userService.getByLogin(userName);
         return currentUser.getUserId();
     }
 

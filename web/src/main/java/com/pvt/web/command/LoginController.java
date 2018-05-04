@@ -28,7 +28,7 @@ public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(ModelMap model) {
-        fillModel(model);
+//        fillModel(model);
         return "login";
     }
 
@@ -39,20 +39,20 @@ public class LoginController {
 //        return mav;
 //    }
 
-    @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
-    public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response,
-                                     @ModelAttribute("login") User userLogin) {
-        ModelAndView mav = null;
-        User user = (User) userService.getByLogin(userLogin.getLogin());
-        if (null != user) {
-            mav = new ModelAndView("welcome");
-            mav.addObject("name", user.getName());
-        } else {
-            mav = new ModelAndView("login");
-            mav.addObject("message", "Username or Password is wrong!!");
-        }
-        return mav;
-    }
+//    @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
+//    public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response,
+//                                     @ModelAttribute("login") User userLogin) {
+//        ModelAndView mav = null;
+//        User user = (User) userService.getByLogin(userLogin.getLogin());
+//        if (null != user) {
+//            mav = new ModelAndView("welcome");
+//            mav.addObject("name", user.getName());
+//        } else {
+//            mav = new ModelAndView("login");
+//            mav.addObject("message", "Username or Password is wrong!!");
+//        }
+//        return mav;
+//    }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public ModelAndView showRegister(HttpServletRequest request, HttpServletResponse response) {
@@ -70,7 +70,7 @@ public class LoginController {
 
     @RequestMapping(value = "/access_denied", method = RequestMethod.GET)
     public String accessDeniedPage(ModelMap model) {
-        fillModel(model);
+//        fillModel(model);
         model.addAttribute("user", getPrincipal());
         return "login";
     }
@@ -86,15 +86,15 @@ public class LoginController {
         return userName;
     }
 
-    private void fillModel(ModelMap model) {
-        populatePageName(model);
-        model.addAttribute("user", new User());
-        model.addAttribute("users", userService.getAll());
-    }
+//    private void fillModel(ModelMap model) {
+//        populatePageName(model);
+//        model.addAttribute("user", new User());
+//        model.addAttribute("users", userService.getAll());
+//    }
 
-    private void populatePageName(ModelMap model) {
-        model.addAttribute("currentPageName", "users");
-    }
+//    private void populatePageName(ModelMap model) {
+//        model.addAttribute("currentPageName", "users");
+//    }
 
 
     @RequestMapping(value="/logout", method = RequestMethod.GET)
@@ -106,29 +106,4 @@ public class LoginController {
         return "redirect:/login";
     }
 
-//    @Override
-//    public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-//        String login = req.getParameter("login");
-//        String password = req.getParameter("password");
-//        if (login==null || password==null) {
-//            resp.setHeader("errorMsg", "Invalid Login or Password");
-//            RequestDispatcher dispatcher = req.getRequestDispatcher(MAIN_PAGE);
-//            dispatcher.forward(req, resp);
-//            return;
-//        }
-//        User user = userService.getByLogin(login);
-//        if (user != null && user.getPassword().equals(Encoder.encode(password))) {
-////        if (user != null && password.equals(user.getPassword())) {
-//            req.getSession().setAttribute("user", user);
-//            String contextPath = req.getContextPath();
-//            resp.sendRedirect(contextPath+ "/frontController?command=orders");
-//            return;
-//        } else {
-//            req.setAttribute("errorMsg", "Invalid Login or Password");
-//            RequestDispatcher dispatcher = req.getRequestDispatcher(MAIN_PAGE);
-//            req.setAttribute("title", "Login form");
-//            dispatcher.forward(req, resp);
-//            return;
-//        }
-//    }
 }

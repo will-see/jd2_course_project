@@ -1,7 +1,9 @@
 package com.pvt.web.command;
 
+import com.google.gson.Gson;
 import com.pvt.dto.BookDto;
 import com.pvt.entities.Book;
+import com.pvt.entities.User;
 import com.pvt.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -15,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Created by w510 on 019 19.09.16.
@@ -29,9 +33,30 @@ public class BookController {
     private BookService bookService;
 
     @RequestMapping(value = "/page", method = RequestMethod.GET)
-    public String getBooks(ModelMap map) {
+    public String allBooks(ModelMap map) {
         fillModel(map);
         return MAIN;
+    }
+
+//    @RequestMapping(value = "/getBook", method = RequestMethod.GET)
+//    public String getBooks(ModelMap map) {
+//        fillModel(map);
+//        return MAIN;
+//    }
+
+    @RequestMapping(value = "/getBook", method = RequestMethod.GET)
+    public void booksPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        User user = (User) request.getSession().getAttribute("user");
+        long bookId = Long.parseLong(request.getParameter("bookId"));
+        long userId = user.getUserId();
+
+        Book book = bookService.get(bookId);
+//        bookService.updateCount(bookId, 1000);
+
+        PrintWriter writer = null;
+        writer = response.getWriter();
+        writer.print(new Gson().toJson(10000));
     }
 
     private void fillModel(ModelMap model) {
