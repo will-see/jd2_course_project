@@ -32,9 +32,10 @@
             <td>${users.role}</td>
                 <td>${users.booksGot}</td>
                 <td>
-                <form action="/formular/view" method="post">
+                <form action="/library/formular/page" method="post">
                 <p><input type="hidden" name="userId" value=${users.userId}>
                 <input type="submit" value="view">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </form>
                 </td>
                 <td>

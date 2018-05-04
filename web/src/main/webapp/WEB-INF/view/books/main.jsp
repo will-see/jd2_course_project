@@ -36,7 +36,7 @@
                         <td class="col-md-1">${book.author}</td>
                         <td id="count${book.bookId}" class="col-md-1">${book.bookCount}</td>
                         <sec:authorize access="isAuthenticated()">
-                        <td class="col-md-1"><input id="${book.bookId}" class="getBookBtn" type="button" title="get book" value="+"/></td>
+                        <td class="col-md-1"><input id="${book.bookId}" class="btn-primary getBookBtn" type="button" title="get book" value="+"/></td>
                         </sec:authorize>
                     </div>
                 </tr>

@@ -7,6 +7,7 @@ import com.pvt.entities.User;
 import com.pvt.services.BookService;
 import com.pvt.services.FormularService;
 import com.pvt.services.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -40,31 +41,26 @@ public class FormularController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/page", method = RequestMethod.GET)
-    public String getBooks(ModelMap map) {
-        fillModel(map);
+    @RequestMapping(value = "/page", method = {RequestMethod.GET, RequestMethod.POST})
+    public String getUserIdFromJsp(ModelMap map,
+                                   @RequestParam(defaultValue = "") String userId) {
+        if (StringUtils.isBlank(userId)) {
+            fillModel(map);
+        } else {
+            globalUserId = userId;
+            fillModel(map);
+        }
         return MAIN;
     }
-
-//    @RequestMapping(value = "/page", method = RequestMethod.GET)
-//    public String getUserIdFromJsp(@RequestParam String userId) {
-//        globalUserId = userId;
-//        return MAIN;
-//    }
 
     private void fillModel(ModelMap model) {
         populatePageName(model);
         model.addAttribute("formular", new FormularDto());
         if (globalUserId != null) {
             model.addAttribute("formularDto", formularService.getUserBooksInFormular(Long.parseLong(globalUserId)));
-//            List<FormularDto> formularDto = formularService.getUserBooksInFormular(Long.parseLong(globalUserId));
-//            req.setAttribute("formularDto", formularDto);
         } else {
             long userId = getUserId();
             model.addAttribute("formularDto", formularService.getUserBooksInFormular(userId));
-//            List<FormularDto> formularDto = formularService.getUserBooksInFormular(user.getUserId());
-//            req.setAttribute("formularDto", formularDto);
-//            userId = getUserId();
         }
     }
 
