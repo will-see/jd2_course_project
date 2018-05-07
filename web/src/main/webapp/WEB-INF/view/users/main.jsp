@@ -36,9 +36,9 @@
                 <td class="col-md-1">${users.booksGot}</td>
                 <td class="col-md-1">
                     <form action="${pageContext.request.contextPath}/formular/page" method="post">
-                        <p><input type="hidden" name="userId" value=${users.userId}>
-                            <input type="submit" value="view">
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        <input type="hidden" name="userId" value=${users.userId}>
+                        <input type="submit" value="view">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     </form>
                 </td>
                 <td class="col-md-1">
@@ -48,7 +48,7 @@
                             <%--<p><input type="hidden" name="flag" value="change">--%>
                         <input type="submit" value="change role">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-                        <%--<jsp:text/>--%>
+                            <%--<jsp:text/>--%>
                     </form>
                 </td>
             </tr>
