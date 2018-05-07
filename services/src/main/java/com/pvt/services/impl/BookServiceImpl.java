@@ -44,11 +44,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void updateCount(long bookId, int bookCount) {
-        try {
-            bookDao.updateCount(bookId,bookCount);
-        } catch (SQLException e) {
-            throw new ServiceException("Error updating Book count" + bookCount);
-        }
+            Book book = (Book) bookDao.get(bookId);
+            book.setBookCount(bookCount);
+            bookDao.update(book);
     }
 
     @Override

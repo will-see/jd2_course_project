@@ -1,9 +1,6 @@
 package com.pvt;
 
-import com.pvt.entities.Author;
-import com.pvt.entities.Book;
-import com.pvt.entities.Role;
-import com.pvt.entities.User;
+import com.pvt.entities.*;
 import com.pvt.services.BookService;
 import com.pvt.services.FormularService;
 import com.pvt.services.UserService;
@@ -65,5 +62,21 @@ public class ServAppTest {
     @Test
     public void serviceFormularDtoTest() throws SQLException {
         System.out.println(formularService.getUserBooksInFormular(15l));
+    }
+
+
+    @Test
+    public void boksUpdateCountTest() throws SQLException{
+        bookService.updateCount(11l,9);
+    }
+
+    @Test
+    public void serviceFormularId() throws SQLException {
+        System.out.println(formularService.getByUserId(21l));
+    }
+    @Test
+            public void newFormularTest() throws SQLException {
+
+        formularService.add(new Formular(null, new User(), null, 11l));
     }
 }

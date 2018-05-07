@@ -32,14 +32,14 @@
             <td>${users.role}</td>
                 <td>${users.booksGot}</td>
                 <td>
-                <form action="/library/formular/page" method="post">
+                <form action="${pageContext.request.contextPath}/formular/page" method="post">
                 <p><input type="hidden" name="userId" value=${users.userId}>
                 <input type="submit" value="view">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </form>
                 </td>
                 <td>
-                <form action="/users/page" method="post">
+                <form action="${pageContext.request.contextPath}/users/page" method="post">
                 <p><input type="hidden" name="userId" value=${users.userId}>
                 <p><input type="hidden" name="role" value=${users.role}>
                 <p><input type="hidden" name="flag" value="change">
@@ -48,16 +48,5 @@
                 </td>
         </tr>
     </c:forEach>
-    <%--<c:forEach var="book" items="${books}" varStatus="status">--%>
-        <%--<tr class="info">--%>
-            <%--<td class="col-md-1">${book.name}</td>--%>
-            <%--<div class="col-md-2">--%>
-                <%--<td class="col-md-1">${book.ganr}</td>--%>
-                <%--<td class="col-md-1">${book.bookCount}</td>--%>
-                    <%--&lt;%&ndash;<td class="col-md-1"><input id="${product.id}" class="btn-primary addProductBtn" type="button" title="Добавить в корзину" value="+"/></td>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;<td class="col-md-1"><input id="${product.id}" class="btn-primary reduceProductBtn" type="button" title="Удалить 1 из корзину" value="-"/></td>&ndash;%&gt;--%>
-            <%--</div>--%>
-        <%--</tr>--%>
-    <%--</c:forEach>--%>
 </TABLE>
 </div>

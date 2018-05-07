@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface BookDao<T> extends DAO<T> {
 
-    void updateCount(long bookId, int bookCount) throws SQLException;
+//    void updateCount(long bookId, int bookCount) throws SQLException;
     List<T> getAll() throws SQLException;
     List<BookDto> getAllDto() throws SQLException;
 }

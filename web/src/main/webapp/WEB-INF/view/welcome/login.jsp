@@ -24,7 +24,7 @@
                             </input>
                         </div>
                         <div>
-                            <label for="login"><spring:message code="login.password"/></label><br>
+                            <label for="password"><spring:message code="login.password"/></label><br>
                             <input type="password" id="password" name="password"
                                    placeholder="<spring:message code="login.enterpassword"/>" required="required"
                                    maxlength="18"><jsp:text/>

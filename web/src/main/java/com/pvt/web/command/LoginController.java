@@ -2,6 +2,7 @@ package com.pvt.web.command;
 
 
 import com.pvt.entities.User;
+import com.pvt.services.ServiceException;
 import com.pvt.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -32,27 +33,6 @@ public class LoginController {
         return "login";
     }
 
-//    @RequestMapping(value = "/login", method = RequestMethod.GET)
-//    public ModelAndView showLogin(HttpServletRequest request, HttpServletResponse response) {
-//        ModelAndView mav = new ModelAndView("login");
-//        mav.addObject("login", new User());
-//        return mav;
-//    }
-
-//    @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
-//    public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response,
-//                                     @ModelAttribute("login") User userLogin) {
-//        ModelAndView mav = null;
-//        User user = (User) userService.getByLogin(userLogin.getLogin());
-//        if (null != user) {
-//            mav = new ModelAndView("welcome");
-//            mav.addObject("name", user.getName());
-//        } else {
-//            mav = new ModelAndView("login");
-//            mav.addObject("message", "Username or Password is wrong!!");
-//        }
-//        return mav;
-//    }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public ModelAndView showRegister(HttpServletRequest request, HttpServletResponse response) {
@@ -69,9 +49,11 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/access_denied", method = RequestMethod.GET)
-    public String accessDeniedPage(ModelMap model) {
-//        fillModel(model);
+    public String addBookToBasket(HttpServletRequest request, ModelMap model) {
+//    public String accessDeniedPage(ModelMap model) {
         model.addAttribute("user", getPrincipal());
+        model.addAttribute("message", "Invalid Login or Password");
+//        throw new ServiceException("Invalid Login or Password");
         return "login";
     }
 
@@ -97,10 +79,10 @@ public class LoginController {
 //    }
 
 
-    @RequestMapping(value="/logout", method = RequestMethod.GET)
-    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){
+        if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         return "redirect:/login";

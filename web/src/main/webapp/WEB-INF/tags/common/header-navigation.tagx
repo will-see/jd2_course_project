@@ -34,6 +34,7 @@
                                 </li>
                             </c:otherwise>
                         </c:choose>
+                        <sec:authorize access="isAuthenticated()">
                         <c:set var="navName"><spring:message code="formular.title"/></c:set>
                         <c:choose>
                             <c:when test="${pageName eq 'Formular'}">
@@ -45,6 +46,7 @@
                                 </li>
                             </c:otherwise>
                         </c:choose>
+                        </sec:authorize>
                         <sec:authorize access="isAuthenticated()">
                         <c:set var="navName"><spring:message code="users.title"/></c:set>
                         <c:choose>

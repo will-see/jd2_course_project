@@ -41,12 +41,12 @@ public class ItemServiceImpl implements ItemService<Item> {
         itemDao.delete(id);
     }
 
-    @Override
-    public List<Item> getByFormularId(long formularId) {
-        try {
-            return itemDao.getByFormularId(formularId);
-        } catch (SQLException e) {
-            throw new ServiceException("Error getting all items");
-        }
-    }
+//    @Override
+//    public List<Item> getByFormularId(long formularId) {
+//        try {
+//            return itemDao.getByFormularId(formularId);
+//        } catch (SQLException e) {
+//            throw new ServiceException("Error getting all items");
+//        }
+//    }
 }

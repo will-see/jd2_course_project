@@ -17,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "FORMULARS")
+@ToString(of = "formularId")
 public class Formular implements Serializable{
         @Id
         @GenericGenerator(name = "user-formular",
@@ -24,7 +25,7 @@ public class Formular implements Serializable{
                 parameters = @org.hibernate.annotations.Parameter(name = "property", value = "user"))
         @GeneratedValue(generator = "user-formular")
         @Column(name = "FORMULAR_ID")
-        private long formularId;
+        private Long formularId;
 
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn (name = "USER_ID")

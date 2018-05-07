@@ -97,7 +97,15 @@ public class AppTest {
 
     @Test
     public void FormularDtoTest() throws SQLException{
-        formularDao.getUserBooksInFormular(15l);
+        formularDao.getUserBooksInFormular(21l);
+    }
+    @Test
+    public void FormularGetAlL() throws SQLException{
+        System.out.println(formularDao.getByUserId(21l));
+    }
+    @Test
+    public void boksGetAllTest() throws SQLException{
+        bookDao.getAll();
     }
 
     @Test

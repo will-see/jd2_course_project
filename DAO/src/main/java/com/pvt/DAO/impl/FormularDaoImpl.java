@@ -41,10 +41,28 @@ public class FormularDaoImpl extends BaseDao<Formular> implements FormularDao<Fo
         return formularDto;
     }
 
+
+
     @Override
     public List<Formular> getByUserId(long userId) throws SQLException {
-        Query query = getEm().createNativeQuery("SELECT formularId, userId FROM formular WHERE userId = ? ORDER BY formularId DESC");
-//        Query query = getEm().createNativeQuery("formularId, userId FROM formular WHERE userId = ? ORDER BY formularId DESC");
-        return query.getResultList();
+//        EntityManager em = getEm();
+//        Session unwrap = em.unwrap(Session.class);
+//        List<Formular> formulars = unwrap.createSQLQuery("SELECT*FROM formulars WHERE USER_ID=(:values)")
+//                .setInteger("values",(int)userId)
+//                .setResultTransformer(Transformers.aliasToBean(Formular.class))
+//                .list();
+//        String hql = "from formular WHERE USER_ID= :values";
+//        Query query = getEm().createQuery(hql);
+//        query.setParameter("values", (int)userId);
+//        List<Formular> formulars = query.getResultList();
+//        return formulars;
+        Query query = getEm().createQuery("from Formular where USER_ID = :values");
+        query.setParameter("values", (int)userId);
+        return (List<Formular>) query.getResultList();
+    }
+
+    public List<Formular> getAll() throws SQLException {
+        Query query = getEm().createQuery("from Formular");
+        return (List<Formular>) query.getResultList();
     }
 }

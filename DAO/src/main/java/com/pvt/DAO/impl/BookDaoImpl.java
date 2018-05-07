@@ -27,11 +27,6 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao<Book> {
     }
 
     @Override
-    public void updateCount(long bookId, int bookCount) throws SQLException {
-        getEm().merge(bookCount);
-    }
-
-    @Override
     public List<Book> getAll() throws SQLException {
         Query query = getEm().createQuery("from Book ");
         return (List<Book>) query.getResultList();
