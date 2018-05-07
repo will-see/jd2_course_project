@@ -33,7 +33,7 @@ public class User {
     @Column (name = "SEX")
     private  String sex;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 //    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ROLE_ID")
     private Role role;

@@ -1,6 +1,7 @@
 package com.pvt.web.command;
 
 
+import com.pvt.entities.Role;
 import com.pvt.entities.User;
 import com.pvt.services.ServiceException;
 import com.pvt.services.UserService;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 
 
 @Controller
@@ -44,6 +46,7 @@ public class LoginController {
     @RequestMapping(value = "/registerProcess", method = RequestMethod.POST)
     public ModelAndView addUser(HttpServletRequest request, HttpServletResponse response,
                                 @ModelAttribute("user") User user) {
+        user.setRole(new Role(null,"user",null));
         userService.add(user);
         return new ModelAndView("welcome", "name", user.getName());
     }
@@ -66,6 +69,25 @@ public class LoginController {
             userName = principal.toString();
         }
         return userName;
+    }
+
+
+    @RequestMapping(value = "/403", method = RequestMethod.GET)
+    public ModelAndView accesssDenied(Principal user) {
+
+        ModelAndView model = new ModelAndView();
+
+        if (user != null) {
+            model.addObject("msg", "Hi " + user.getName()
+                    + ", you do not have permission to access this page!");
+        } else {
+            model.addObject("msg",
+                    "You do not have permission to access this page!");
+        }
+
+        model.setViewName("403");
+        return model;
+
     }
 
 //    private void fillModel(ModelMap model) {

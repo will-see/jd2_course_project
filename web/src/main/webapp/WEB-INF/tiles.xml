@@ -15,6 +15,11 @@
         <put-attribute name="body" value="/WEB-INF/view/welcome/body.jsp"/>
     </definition>
 
+    <definition name="error 403" extends="default">
+        <put-attribute name="title" value="error 403"/>
+        <put-attribute name="body" value="/WEB-INF/pages/403.jsp"/>
+    </definition>
+
     <definition name="books/main" extends="default">
         <put-attribute name="title" value="Books Info"/>
         <put-attribute name="body" value="/WEB-INF/view/books/main.jsp"/>

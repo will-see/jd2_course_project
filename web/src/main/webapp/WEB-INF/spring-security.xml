@@ -11,8 +11,8 @@
         <intercept-url pattern="/" access="permitAll"/>
         <intercept-url pattern="/welcome" access="permitAll"/>
         <intercept-url pattern="/formular" access="isAuthenticated()"/>
-        <!--<intercept-url pattern="/users/page" access="hasRole('ROLE_ADMIN')"/>-->
-        <intercept-url pattern="/users/page" access="isAuthenticated()"/>
+        <intercept-url pattern="/users/page" access="hasRole('ROLE_admin')"/>
+        <!--<intercept-url pattern="/users/page" access="isAuthenticated()"/>-->
         <intercept-url pattern="/books/page" access="permitAll"/>
         <!--<logout invalidate-session="true" logout-url="logout" logout-success-url="/login"/>-->
         <form-login login-page="/login"
@@ -21,6 +21,7 @@
                     authentication-failure-url="/access_denied"
                     default-target-url="/books/page"
         />
+        <access-denied-handler error-page="/403" />
         <!--<csrf disabled="true"/>-->
         <!--<csrf/>-->
     </http>

@@ -25,6 +25,7 @@ public class AuthenticationService implements UserDetailsService {
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         User user = (User)userService.getByLogin(login);
         System.out.println("User : " + user);
+//        Role userRole = new Role(null,"user",user);
         if (user == null) {
             System.out.println("User not found");
             throw new UsernameNotFoundException("Username not found");
