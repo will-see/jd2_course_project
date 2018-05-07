@@ -15,29 +15,21 @@
         </tr>
         <c:forEach var="formular" items="${formularDto}" varStatus="status">
             <tr class="info">
-                    <td class="col-md-1">${status.index +1}</td>
-                    <td class="col-md-1">${formular.name}</td>
-                    <td class="col-md-1">${formular.author}</td>
-                    <sec:authorize access="isAuthenticated()">
-                        <td class="col-md-1"><input id="${book.bookId}" class="getBack" type="button" title="get back" value=<spring:message code="books.getBack"/> onclick="getBack()"/></td>
-                        <%--<td class="col-md-1"><input id="${book.bookId}" class="btn-primary getBookBtn" type="button" title="get book" value="+"/></td>--%>
-                    </sec:authorize>
+                <td class="col-md-1">${status.index +1}</td>
+                <td class="col-md-1">${formular.name}</td>
+                <td class="col-md-1">${formular.author}</td>
+                <sec:authorize access="isAuthenticated()">
+                    <td class="col-md-1">
+                        <form action="${pageContext.request.contextPath}/books/getBack" method="post">
+                            <input type="hidden" name="bookId" value="${formular.bookId}"/>
+                            <input type="hidden" name="userId" value=${formular.userId}>
+                            <input type="submit" value=<spring:message code="books.getBack"/>>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                            <jsp:text/>
+                        </form>
+                    </td>
+                </sec:authorize>
             </tr>
         </c:forEach>
     </table>
-<%--<TABLE>--%>
-    <%--<tr>--%>
-        <%--<th width=35>№</th>--%>
-        <%--<th width=200><spring:message code="books.name"/>></th>--%>
-        <%--<th><spring:message code="books.author"/></th>--%>
-    <%--</tr>--%>
-
-    <%--<c:forEach var="formular" items="${formularDto}" varStatus="status">--%>
-        <%--<tr>--%>
-            <%--<td>${status.index +1}</td>--%>
-            <%--<td>${formular.name}</td>--%>
-            <%--<td>${formular.author}</td>--%>
-        <%--</tr>--%>
-    <%--</c:forEach>--%>
-<%--</TABLE>--%>
 </div>

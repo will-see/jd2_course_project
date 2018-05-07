@@ -97,7 +97,7 @@ public class AppTest {
 
     @Test
     public void FormularDtoTest() throws SQLException{
-        formularDao.getUserBooksInFormular(21l);
+        System.out.println(formularDao.getUserBooksInFormular(13l));
     }
     @Test
     public void FormularGetAlL() throws SQLException{

@@ -33,6 +33,6 @@ public class Formular implements Serializable{
 
         @OneToMany(mappedBy = "formular",cascade = CascadeType.ALL)
         private List<Item> items = new ArrayList<>();
-        private long bookId;
+        private Long bookId;
 
 }

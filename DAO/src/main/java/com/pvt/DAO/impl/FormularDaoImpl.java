@@ -32,10 +32,16 @@ public class FormularDaoImpl extends BaseDao<Formular> implements FormularDao<Fo
         EntityManager em = getEm();
         Session unwrap = em.unwrap(Session.class);
 
-        List<FormularDto> formularDto = unwrap.createSQLQuery("SELECT books.title as name, authors.name author FROM books JOIN formulars ON formulars.bookId=books.bookId JOIN authors ON books.AUTHOR_ID = authors.authorId WHERE USER_ID=(:values)")
-                .setInteger("values",(int)userId)
+//        List<FormularDto> formularDto = unwrap.createSQLQuery("SELECT books.title as name, authors.name author FROM books JOIN formulars ON formulars.bookId=books.bookId JOIN authors ON books.AUTHOR_ID = authors.authorId WHERE USER_ID=(:values)")
+//                .setInteger("values",(int)userId)
 //                .addScalar("name", StandardBasicTypes.STRING)
 //                .addScalar("author", StandardBasicTypes.STRING)
+//                .setResultTransformer(Transformers.aliasToBean(FormularDto.class))
+//                .list();
+//        return formularDto;
+
+        List<FormularDto> formularDto = unwrap.createSQLQuery("SELECT books.title as name, books.bookId as bookId, formulars.USER_ID as userId, authors.name author FROM books JOIN formulars ON formulars.bookId=books.bookId JOIN authors ON books.AUTHOR_ID = authors.authorId WHERE USER_ID=(:values)")
+                .setInteger("values",(int)userId)
                 .setResultTransformer(Transformers.aliasToBean(FormularDto.class))
                 .list();
         return formularDto;

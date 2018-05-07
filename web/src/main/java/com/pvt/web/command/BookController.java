@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 import java.util.List;
 
 
@@ -82,6 +83,25 @@ public class BookController {
 
         return "redirect:/books/page";
     }
+    @RequestMapping(value = "/getBack", method = {RequestMethod.POST})
+    public String getBack(HttpServletRequest request, ModelMap map) {
+
+        long bookId = Long.parseLong(request.getParameter("bookId"));
+        long userId = Long.parseLong(request.getParameter("userId"));
+//        User currentUser = getUser();
+//        long userId = currentUser.getUserId();
+        System.out.println("book id = " + bookId + " user id " + userId);
+        doGetBack(userId, bookId);
+        return "redirect:/formular/page";
+    }
+    @Transactional
+    void doGetBack(long bookId, long userId){
+        Formular formular = (Formular)formularService.getByUserId(userId);
+        Book book = (Book)bookService.get(bookId);
+//        if (formular.contains(book)){
+//
+//        }
+    }
 
     private User getUser() {
         String userName;
@@ -94,37 +114,6 @@ public class BookController {
         User currentUser = (User) userService.getByLogin(userName);
         return currentUser;
     }
-
-//    @RequestMapping(value = "/getBook", method = RequestMethod.GET)
-//    public void booksPage(HttpServletRequest request, HttpServletResponse response) throws IOException {
-//
-//        User user = (User) request.getSession().getAttribute("user");
-//        long bookId = Long.parseLong(request.getParameter("bookId"));
-//        long userId = user.getUserId();
-//
-////        Book book = bookService.get(bookId);
-//        System.out.println("it works");
-////        bookService.updateCount(bookId, 1000);
-//
-//        PrintWriter writer = null;
-//        writer = response.getWriter();
-//        writer.print(new Gson().toJson(10000));
-//    }
-
-//    @RequestMapping(value = "/getBook", method = RequestMethod.GET)
-//    public @ResponseBody
-//    Book getBook(@RequestParam String bookId) {
-//
-//        Book result = new Book();
-//        System.out.println("test boton");
-//        if (text != null) {
-//            result.setText(text);
-//            result.setCount(text.length());
-//        }
-
-//        return result;
-//    }
-
 
     private void fillModel(ModelMap model) {
         populatePageName(model);
