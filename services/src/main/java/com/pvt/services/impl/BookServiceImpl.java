@@ -42,12 +42,12 @@ public class BookServiceImpl implements BookService {
             bookDao.delete(id);
     }
 
-    @Override
-    public void updateCount(long bookId, int bookCount) {
-            Book book = (Book) bookDao.get(bookId);
-            book.setBookCount(bookCount);
-            bookDao.update(book);
-    }
+//    @Override
+//    public void updateCount(long bookId, int bookCount) {
+//            Book book = (Book) bookDao.get(bookId);
+//            book.setBookCount(bookCount);
+//            bookDao.update(book);
+//    }
 
     @Override
     public List<Book> getAll() {

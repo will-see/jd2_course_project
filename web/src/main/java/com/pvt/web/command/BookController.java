@@ -45,6 +45,7 @@ public class BookController {
 
         return MAIN;
     }
+
     @Transactional
     @RequestMapping(value = "/getBook", method = {RequestMethod.POST})
     public String getBooks(HttpServletRequest request, ModelMap map) {
@@ -63,7 +64,11 @@ public class BookController {
             if (formulars.size() == 0) {
                 books.add(book);
                 bookCount--;
-                bookService.updateCount(bookId, bookCount);
+//                bookService.updateCount(bookId, bookCount);
+//                updateCount(long bookId, int bookCount) {
+//                    Book book = (Book) bookDao.get(bookId);
+                book.setBookCount(bookCount);
+                bookService.update(book);
                 formularService.add(new Formular(null, currentUser, books));
 //                formularService.add(new Formular(null, currentUser, new Item(null,null,book), bookId));
             } else {
@@ -77,8 +82,9 @@ public class BookController {
                 }
                 if (flag == true) {
                     bookCount--;
-                    bookService.updateCount(bookId, bookCount);
-                    books.add(book);
+                    book.setBookCount(bookCount);
+                    bookService.update(book);
+                    formularService.add(new Formular(null, currentUser, books));
                 }
             }
         }

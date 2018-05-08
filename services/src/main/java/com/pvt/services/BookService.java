@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BookService extends Service<Book> {
 
-    void updateCount(long bookId, int bookCount);
+//    void updateCount(long bookId, int bookCount);
     List<Book> getAll();
     List<BookDto> getAllDto();
 }

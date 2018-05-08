@@ -51,11 +51,11 @@ public class GetBookController implements Controller {
         System.out.println(bookCount);
         if (bookCount > 0) {
             List<Formular> formulars = formularService.getByUserId(userId);
-            if (formulars.size() == 0) {
-                bookCount--;
-                bookService.updateCount(bookId, bookCount);
+//            if (formulars.size() == 0) {
+//                bookCount--;
+//                bookService.updateCount(bookId, bookCount);
                 // TODO: 23.04.2018             formularService.createFormular(userId, bookId);
-            } else {
+//            } else {
 //                boolean flag = true;
 //                for (int i = 0; i < formulars.size(); i++) {
 //                    if (formulars.get(i).getBookId() == bookId) {
@@ -68,7 +68,7 @@ public class GetBookController implements Controller {
 //                    bookService.updateCount(bookId, bookCount);
 //                    // TODO: 23.04.2018     formularService.createFormular(userId, bookId);
 //                }
-            }
+//            }
         }
         PrintWriter writer = resp.getWriter();
         writer.print(new Gson().toJson(bookCount));

@@ -103,10 +103,10 @@ public class ServAppTest {
         System.out.println(list);
     }
 
-    @Test
-    public void boksUpdateCountTest() throws SQLException{
-        bookService.updateCount(11l,9);
-    }
+//    @Test
+//    public void boksUpdateCountTest() throws SQLException{
+//        bookService.updateCount(11l,9);
+//    }
 
     @Test
     public void serviceFormularId() throws SQLException {
