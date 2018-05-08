@@ -72,7 +72,7 @@ public class ServAppTest {
     }
     @Test
     public void serviceFormularDtoTest() throws SQLException {
-        System.out.println(formularService.getUserBooksInFormular(15l));
+        System.out.println(formularService.getUserBooksInFormular(1l));
     }
 
     @Test

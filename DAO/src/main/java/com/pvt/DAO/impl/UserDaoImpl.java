@@ -57,7 +57,7 @@ public class UserDaoImpl extends BaseDao<User> implements UserDao<User> {
     public List<UsersDto> getAllDto() throws SQLException {
         EntityManager em = getEm();
         Session unwrap = em.unwrap(Session.class);
-        List<UsersDto> usersDto = unwrap.createSQLQuery("SELECT users.USER_ID as userId, FIRST_NAME as name, LOGIN as login, AGE as age, SEX as sex, roles.ROLE_NAME AS role, COUNT(bookId) AS booksGot FROM users  JOIN roles ON users.ROLE_ID = roles.ROLE_ID  LEFT JOIN formulars ON users.USER_ID = formulars.USER_ID LEFT JOIN books b ON formulars.FORMULAR_ID = b.FORMULAR_ID GROUP BY FIRST_NAME ORDER BY userId;")
+        List<UsersDto> usersDto = unwrap.createSQLQuery("SELECT users.USER_ID AS userId, FIRST_NAME AS name, LOGIN AS login, AGE AS age, SEX AS sex, roles.ROLE_NAME AS role, COUNT(b.bookId) AS booksGot FROM users JOIN roles ON users.ROLE_ID = roles.ROLE_ID LEFT JOIN formulars f ON users.USER_ID = f.USER_ID LEFT JOIN formular_book fb ON fb.FORMULAR_ID = f.FORMULAR_ID LEFT JOIN books b ON b.bookId = fb.bookId GROUP BY FIRST_NAME ORDER BY userId")
                 .addScalar("userId", StandardBasicTypes.LONG)
                 .addScalar("name", StandardBasicTypes.STRING)
                 .addScalar("login", StandardBasicTypes.STRING)

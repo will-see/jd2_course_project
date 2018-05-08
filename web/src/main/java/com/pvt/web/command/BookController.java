@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +45,7 @@ public class BookController {
 
         return MAIN;
     }
-
+    @Transactional
     @RequestMapping(value = "/getBook", method = {RequestMethod.POST})
     public String getBooks(HttpServletRequest request, ModelMap map) {
 
@@ -85,6 +85,19 @@ public class BookController {
 
         return "redirect:/books/page";
     }
+
+//    private void addToFormular(){
+//        User user = (User)userService.get(2l);
+//        Book book = (Book) bookService.get(2l);
+//
+//        Formular f = new Formular(null,user,new ArrayList<>());
+//
+//        book.getFormulars().add(f);
+//        f.getBooks().add(book);
+//
+//        formularService.add(f);
+//        bookService.add(book);
+//    }
 
     @RequestMapping(value = "/getBack", method = {RequestMethod.POST})
     public String getBack(HttpServletRequest request, ModelMap map) {

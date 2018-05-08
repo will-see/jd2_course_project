@@ -40,7 +40,7 @@ public class FormularDaoImpl extends BaseDao<Formular> implements FormularDao<Fo
 //                .list();
 //        return formularDto;
 
-        List<FormularDto> formularDto = unwrap.createSQLQuery("SELECT books.title as name, books.bookId as bookId, formulars.USER_ID as userId, authors.name author FROM books JOIN formulars ON formulars.FORMULAR_ID = books.FORMULAR_ID JOIN authors ON books.AUTHOR_ID = authors.authorId WHERE USER_ID=(:values)")
+        List<FormularDto> formularDto = unwrap.createSQLQuery("SELECT b.title as name, b.bookId as bookId, f.USER_ID as userId, authors.name author FROM books AS b JOIN formular_book fb ON b.bookId = fb.bookId JOIN formulars f ON fb.FORMULAR_ID = f.FORMULAR_ID JOIN authors ON b.AUTHOR_ID = authors.authorId WHERE USER_ID=(:values)")
                 .setInteger("values",(int)userId)
                 .setResultTransformer(Transformers.aliasToBean(FormularDto.class))
                 .list();
