@@ -56,18 +56,18 @@ public class GetBookController implements Controller {
                 bookService.updateCount(bookId, bookCount);
                 // TODO: 23.04.2018             formularService.createFormular(userId, bookId);
             } else {
-                boolean flag = true;
-                for (int i = 0; i < formulars.size(); i++) {
-                    if (formulars.get(i).getBookId() == bookId) {
-                        flag = false;
-                        break;
-                    }
-                }
-                if (flag == true) {
-                    bookCount--;
-                    bookService.updateCount(bookId, bookCount);
-                    // TODO: 23.04.2018     formularService.createFormular(userId, bookId);
-                }
+//                boolean flag = true;
+//                for (int i = 0; i < formulars.size(); i++) {
+//                    if (formulars.get(i).getBookId() == bookId) {
+//                        flag = false;
+//                        break;
+//                    }
+//                }
+//                if (flag == true) {
+//                    bookCount--;
+//                    bookService.updateCount(bookId, bookCount);
+//                    // TODO: 23.04.2018     formularService.createFormular(userId, bookId);
+//                }
             }
         }
         PrintWriter writer = resp.getWriter();

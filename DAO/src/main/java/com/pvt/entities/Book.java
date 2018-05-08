@@ -35,8 +35,9 @@ public class Book {
     @Column
     private int bookCount;
 
-    @OneToOne(mappedBy = "book", cascade = {CascadeType.ALL})
-    private Item item;
+    @ManyToOne
+    @JoinColumn(name = "FORMULAR_ID")
+    private Formular formular;
 
     public Book(String title, String ganr, int pages, Author author, int bookCount) {
         this.title = title;

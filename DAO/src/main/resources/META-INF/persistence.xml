@@ -9,7 +9,7 @@
         <class>com.pvt.entities.Author</class>
         <class>com.pvt.entities.Book</class>
         <class>com.pvt.entities.Formular</class>
-        <class>com.pvt.entities.Item</class>
+        <!--<class>com.pvt.entities.Item</class>-->
         <class>com.pvt.entities.Role</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>

@@ -101,7 +101,7 @@ public class AppTest {
     }
     @Test
     public void FormularGetAlL() throws SQLException{
-        System.out.println(formularDao.getByUserId(21l));
+        System.out.println(formularDao.getByUserId(13l));
     }
     @Test
     public void boksGetAllTest() throws SQLException{

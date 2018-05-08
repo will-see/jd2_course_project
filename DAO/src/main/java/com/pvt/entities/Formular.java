@@ -31,8 +31,7 @@ public class Formular implements Serializable{
         @JoinColumn (name = "USER_ID")
         private User user;
 
-        @OneToMany(mappedBy = "formular",cascade = CascadeType.ALL)
-        private List<Item> items = new ArrayList<>();
-        private Long bookId;
+        @OneToMany(fetch = FetchType.EAGER, mappedBy = "formular",cascade = CascadeType.ALL)
+        private List<Book> items = new ArrayList<>();
 
 }

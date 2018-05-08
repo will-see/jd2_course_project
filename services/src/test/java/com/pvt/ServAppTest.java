@@ -14,6 +14,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.SocketHandler;
 
 //
@@ -61,13 +63,35 @@ public class ServAppTest {
 
     @Test
     public void serviceTest() throws SQLException {
-        System.out.println(bookService.getAllDto());
+        System.out.println(userService.getAllDto());
     }
     @Test
     public void serviceFormularDtoTest() throws SQLException {
         System.out.println(formularService.getUserBooksInFormular(15l));
     }
 
+    @Test
+    public void getBookTest(){
+        User user = (User)userService.get(13l);
+        Book book = (Book) bookService.get(1l);
+        ArrayList<Book> books = new ArrayList<>();
+        Formular formular = new Formular(null,user,books);
+        formularService.add(formular);
+    }
+
+    @Test
+    public void getBooksList(){
+        User user = (User)userService.get(13l);
+        Book book = (Book) bookService.get(1l);
+        List<Book> books = new ArrayList<>();
+        Formular formular = new Formular(null,user,books);
+        formularService.add(formular);
+        Formular formularFromBase = (Formular)formularService.get(13l);
+        Long userId = formularFromBase.getUser().getUserId();
+        List<Book> list = formularFromBase.getItems();
+        System.out.println(userId);
+        System.out.println(list);
+    }
 
     @Test
     public void boksUpdateCountTest() throws SQLException{
@@ -85,7 +109,7 @@ public class ServAppTest {
         User user = (User) userService.get(13l);
         Formular formular = (Formular) formularService.get(13l);
 
-            Item tItem = new Item(null,new Formular(null,new User(null,"fake","fake","fake",100,"male",(new Role(null,"user",null)),null),null,null),book);
+//            Item tItem = new Item(null,new Formular(null,new User(null,"fake","fake","fake",100,"male",(new Role(null,"user",null)),null),null,null),book);
 
         Item item = new Item(null,formular,book);
 
@@ -94,7 +118,7 @@ public class ServAppTest {
         Book b = new Book("title","ganr",0,a,50);
         Item fItem = new Item(null,null,b);
 
-        Formular f = new Formular(null,u,null,null);
+//        Formular f = new Formular(null,u,null,null);
 
             System.out.println(book);
             System.out.println(user);
@@ -105,6 +129,6 @@ public class ServAppTest {
     @Test
             public void newFormularTest() throws SQLException {
 
-        formularService.add(new Formular(null, new User(), null, 11l));
+//        formularService.add(new Formular(null, new User(), null, 11l));
     }
 }

@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.pvt.dto.BookDto;
 import com.pvt.entities.Book;
 import com.pvt.entities.Formular;
-import com.pvt.entities.Item;
 import com.pvt.entities.User;
 import com.pvt.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -59,30 +59,33 @@ public class BookController {
 
         if (bookCount > 0) {
             List<Formular> formulars = formularService.getByUserId(userId);
+            ArrayList<Book> books = new ArrayList<>();
             if (formulars.size() == 0) {
+                books.add(book);
                 bookCount--;
                 bookService.updateCount(bookId, bookCount);
-                formularService.add(new Formular(null, currentUser, null, bookId));
+                formularService.add(new Formular(null, currentUser, books));
 //                formularService.add(new Formular(null, currentUser, new Item(null,null,book), bookId));
             } else {
                 boolean flag = true;
                 for (int i = 0; i < formulars.size(); i++) {
-                    if (formulars.get(i).getBookId() == bookId) {
+                    if (formulars.get(i).getItems().contains(book)) {
                         flag = false;
                         break;
                     }
+                    throw new ServiceException(" book taken yet ");
                 }
                 if (flag == true) {
                     bookCount--;
                     bookService.updateCount(bookId, bookCount);
-                    formularService.add(new Formular(null, currentUser, null, bookId));
-//                    throw new ServiceException(" book taken yet ");
+                    books.add(book);
                 }
             }
         }
 
         return "redirect:/books/page";
     }
+
     @RequestMapping(value = "/getBack", method = {RequestMethod.POST})
     public String getBack(HttpServletRequest request, ModelMap map) {
 
@@ -94,10 +97,11 @@ public class BookController {
         doGetBack(userId, bookId);
         return "redirect:/formular/page";
     }
+
     @Transactional
-    void doGetBack(long bookId, long userId){
-        Formular formular = (Formular)formularService.getByUserId(userId);
-        Book book = (Book)bookService.get(bookId);
+    void doGetBack(long bookId, long userId) {
+        Formular formular = (Formular) formularService.getByUserId(userId);
+        Book book = (Book) bookService.get(bookId);
 //        if (formular.contains(book)){
 //
 //        }
