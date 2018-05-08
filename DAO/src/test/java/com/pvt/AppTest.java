@@ -67,7 +67,7 @@ public class AppTest {
 //        user.setFormulars(new ArrayList<>());
 //        user.getFormulars().add(formular);
 //        Book persistent = (Book) bookDao.add(book);
-        bookDao.add(new Book("lukomore","skazka",100, author,10));
+        bookDao.add(new Book(null,"lukomore","skazka",100, author,10,null));
 //        Assert.assertNotEquals(user,null);
 
 //        System.out.println(user);
@@ -92,7 +92,7 @@ public class AppTest {
     public void bookAddOtherTest(){
         Author author = new Author();
         author.setName("Pushkin");
-        bookDao.add(new Book("lukomore","skazka",100, author,10));
+        bookDao.add(new Book(null,"lukomore","skazka",100, author,10,null));
     }
 
     @Test

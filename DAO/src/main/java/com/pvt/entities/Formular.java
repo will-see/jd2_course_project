@@ -20,10 +20,10 @@ import java.util.List;
 @ToString(of = "formularId")
 public class Formular implements Serializable{
         @Id
-        @GenericGenerator(name = "user-formular",
-                strategy = "foreign",
-                parameters = @org.hibernate.annotations.Parameter(name = "property", value = "user"))
-        @GeneratedValue(generator = "user-formular")
+//        @GenericGenerator(name = "user-formular",
+//                strategy = "foreign",
+//                parameters = @org.hibernate.annotations.Parameter(name = "property", value = "user"))
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "FORMULAR_ID")
         private Long formularId;
 
@@ -31,7 +31,10 @@ public class Formular implements Serializable{
         @JoinColumn (name = "USER_ID")
         private User user;
 
-        @OneToMany(fetch = FetchType.EAGER, mappedBy = "formular",cascade = CascadeType.ALL)
-        private List<Book> items = new ArrayList<>();
+//        @OneToMany(fetch = FetchType.EAGER, mappedBy = "formular",cascade = CascadeType.ALL)
+//        private List<Book> items = new ArrayList<>();
+
+        @ManyToMany(mappedBy = "formulars")
+        private List<Book> books = new ArrayList<Book>();
 
 }

@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -15,7 +17,7 @@ import javax.persistence.*;
 @Table (name = "BOOKS")
 public class Book {
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column
     private Long bookId;
 
@@ -35,15 +37,21 @@ public class Book {
     @Column
     private int bookCount;
 
-    @ManyToOne
-    @JoinColumn(name = "FORMULAR_ID")
-    private Formular formular;
+//    @ManyToOne
+//    @JoinColumn(name = "FORMULAR_ID")
+//    private Formular formular;
 
-    public Book(String title, String ganr, int pages, Author author, int bookCount) {
-        this.title = title;
-        this.ganr = ganr;
-        this.pages = pages;
-        this.author = author;
-        this.bookCount = bookCount;
-    }
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable (name = "formular_book", joinColumns = {@JoinColumn(name = "bookId")},
+    inverseJoinColumns = {@JoinColumn(name = "FORMULAR_ID")}
+    )
+    private List<Formular> formulars =new ArrayList<>();
+
+//    public Book(String title, String ganr, int pages, Author author, int bookCount) {
+//        this.title = title;
+//        this.ganr = ganr;
+//        this.pages = pages;
+//        this.author = author;
+//        this.bookCount = bookCount;
+//    }
 }

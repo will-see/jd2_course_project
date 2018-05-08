@@ -69,7 +69,7 @@ public class BookController {
             } else {
                 boolean flag = true;
                 for (int i = 0; i < formulars.size(); i++) {
-                    if (formulars.get(i).getItems().contains(book)) {
+                    if (formulars.get(i).getBooks().contains(book)) {
                         flag = false;
                         break;
                     }

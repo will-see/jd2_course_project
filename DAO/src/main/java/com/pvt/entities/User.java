@@ -19,7 +19,7 @@ import java.util.List;
 @ToString(exclude = {"role", "formulars"})
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_ID")
     private Long userId;
     @Column(name = "FIRST_NAME")

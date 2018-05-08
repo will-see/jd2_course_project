@@ -12,7 +12,7 @@ import javax.persistence.*;
 @ToString(of = "rolename")
 public class Role {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ROLE_ID")
     private Long roleId;
     @Column (name = "ROLE_NAME")

@@ -45,12 +45,17 @@ public class ServAppTest {
     public void fillBaseTest() {
 //            Author author = new Author(null,"Puskin",1900,"Rusia",null);
 //            author.setName("Pushkin");
-        bookService.add(new Book("lukomore", "skazka", 100, new Author(null, "Puskin", 1900, "Rusia", null), 10));
-        bookService.add(new Book("lukomore2", "skazka2", 101, new Author(null, "Puskin", 1800, "Rusia", null), 10));
-        bookService.add(new Book("lukomore3", "skazka3", 102, new Author(null, "Puskin", 1700, "Rusia", null), 10));
-        bookService.add(new Book("lukomore4", "skazka4", 103, new Author(null, "Puskin", 1600, "Rusia", null), 10));
-        bookService.add(new Book("lukomore5", "skazka5", 104, new Author(null, "Puskin", 1500, "Rusia", null), 10));
-        bookService.add(new Book("lukomore6", "skazka6", 105, new Author(null, "Puskin", 1400, "Rusia", null), 10));
+        bookService.add(new Book(null,"lukomore1", "skazka1", 101, new Author(null, "Puskin1", 1901, "Rusia", null), 10,null));
+        bookService.add(new Book(null,"lukomore2", "skazka2", 102, new Author(null, "Puskin2", 1902, "Rusia", null), 10,null));
+        bookService.add(new Book(null,"lukomore3", "skazka3", 103, new Author(null, "Puskin3", 1903, "Rusia", null), 10,null));
+        bookService.add(new Book(null,"lukomore4", "skazka4", 104, new Author(null, "Puskin4", 1904, "Rusia", null), 10,null));
+        bookService.add(new Book(null,"lukomore5", "skazka5", 105, new Author(null, "Puskin5", 1905, "Rusia", null), 10,null));
+        bookService.add(new Book(null,"lukomore6", "skazka6", 106, new Author(null, "Puskin6", 19006, "Rusia", null), 10,null));
+//        bookService.add(new Book("lukomore2", "skazka2", 101, new Author(null, "Puskin", 1800, "Rusia", null), 10));
+//        bookService.add(new Book("lukomore3", "skazka3", 102, new Author(null, "Puskin", 1700, "Rusia", null), 10));
+//        bookService.add(new Book("lukomore4", "skazka4", 103, new Author(null, "Puskin", 1600, "Rusia", null), 10));
+//        bookService.add(new Book("lukomore5", "skazka5", 104, new Author(null, "Puskin", 1500, "Rusia", null), 10));
+//        bookService.add(new Book("lukomore6", "skazka6", 105, new Author(null, "Puskin", 1400, "Rusia", null), 10));
 //
 //        Role role = new Role(null,  "admin", null);
         userService.add(new User(null,"admin","admin","admin",10,"male",new Role(null,  "admin", null),null));
@@ -72,11 +77,16 @@ public class ServAppTest {
 
     @Test
     public void getBookTest(){
-        User user = (User)userService.get(13l);
-        Book book = (Book) bookService.get(1l);
-        ArrayList<Book> books = new ArrayList<>();
-        Formular formular = new Formular(null,user,books);
-        formularService.add(formular);
+        User user = (User)userService.get(2l);
+        Book book = (Book) bookService.get(2l);
+
+        Formular f = new Formular(null,user,new ArrayList<>());
+
+        book.getFormulars().add(f);
+        f.getBooks().add(book);
+
+        formularService.add(f);
+        bookService.add(book);
     }
 
     @Test
@@ -88,7 +98,7 @@ public class ServAppTest {
         formularService.add(formular);
         Formular formularFromBase = (Formular)formularService.get(13l);
         Long userId = formularFromBase.getUser().getUserId();
-        List<Book> list = formularFromBase.getItems();
+        List<Book> list = formularFromBase.getBooks();
         System.out.println(userId);
         System.out.println(list);
     }
@@ -115,7 +125,7 @@ public class ServAppTest {
 
         Author a = new Author(null,null,0,null,null);
         User u = new User(null,null,null,null,0,null,null,null);
-        Book b = new Book("title","ganr",0,a,50);
+        Book b = new Book(null,"title","ganr",0,a,50,null);
         Item fItem = new Item(null,null,b);
 
 //        Formular f = new Formular(null,u,null,null);
