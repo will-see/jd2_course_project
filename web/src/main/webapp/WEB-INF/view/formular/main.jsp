@@ -18,7 +18,7 @@
                 <td class="col-md-1">${status.index +1}</td>
                 <td class="col-md-1">${formular.name}</td>
                 <td class="col-md-1">${formular.author}</td>
-                <sec:authorize access="isAuthenticated()">
+                <sec:authorize access="hasRole('ROLE_admin')">
                     <td class="col-md-1">
                         <form action="${pageContext.request.contextPath}/books/getBack" method="post">
                             <input type="hidden" name="bookId" value="${formular.bookId}"/>

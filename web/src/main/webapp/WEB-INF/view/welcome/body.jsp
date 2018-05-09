@@ -5,16 +5,17 @@
 
 <table width="100%" border="0">
     <tr>
-        <td align="center" valign="center">
+        <br align="center" valign="center">
             <c:set var="title">
                 <spring:message code="welcome.title"/>
-                some title
             </c:set>
             <c:if test="${not empty title}">
                 <title>${title}</title>
             </c:if>
             <h2><spring:message code="welcome.body.text0"/></h2>
             <spring:message code="welcome.body.text1"/>
+        <br>
+            <spring:message code="welcome.body.text2"/>
             <%--some text--%>
         </td>
     </tr>

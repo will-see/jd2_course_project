@@ -5,6 +5,7 @@ import com.pvt.entities.Role;
 import com.pvt.entities.User;
 import com.pvt.services.ServiceException;
 import com.pvt.services.UserService;
+import com.pvt.web.auth.Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,13 +32,12 @@ public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(ModelMap model) {
-//        fillModel(model);
         return "login";
     }
 
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public ModelAndView showRegister(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView showRegister() {
         ModelAndView mav = new ModelAndView("register");
         mav.addObject("user", new User());
         return mav;
@@ -47,16 +47,15 @@ public class LoginController {
     public ModelAndView addUser(HttpServletRequest request, HttpServletResponse response,
                                 @ModelAttribute("user") User user) {
         user.setRole(new Role(null,"user",null));
+//        user.setPassword(Encoder.encode(user.getPassword()));
         userService.add(user);
-        return new ModelAndView("welcome", "name", user.getName());
+        return new ModelAndView("login", "name", user.getName());
     }
 
     @RequestMapping(value = "/access_denied", method = RequestMethod.GET)
-    public String addBookToBasket(HttpServletRequest request, ModelMap model) {
-//    public String accessDeniedPage(ModelMap model) {
+    public String loginFailed(ModelMap model) {
         model.addAttribute("user", getPrincipal());
         model.addAttribute("message", "Invalid Login or Password");
-//        throw new ServiceException("Invalid Login or Password");
         return "login";
     }
 
@@ -85,7 +84,7 @@ public class LoginController {
                     "You do not have permission to access this page!");
         }
 
-        model.setViewName("403");
+        model.setViewName("errors/403");
         return model;
 
     }

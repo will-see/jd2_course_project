@@ -17,7 +17,7 @@
 
     <definition name="error 403" extends="default">
         <put-attribute name="title" value="error 403"/>
-        <put-attribute name="body" value="/WEB-INF/pages/403.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/view/errors/403.jsp"/>
     </definition>
 
     <definition name="books/main" extends="default">

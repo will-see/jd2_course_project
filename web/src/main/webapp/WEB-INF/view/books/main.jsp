@@ -3,6 +3,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
+<div class="error">${message}</div>
 <head>
     <%--<![CDATA[--%>
     <script src="${pageContext.request.contextPath}/assests/js/jquery-1.11.1.min.js" type="text/javascript">
@@ -15,9 +16,9 @@
     <title>Books Page</title>
 </head>
 
-<div style="font-size: large">
-    <c:if test="${not empty message}">INFO : ${message}</c:if> <br/>
-</div>
+<%--<div style="font-size: large">--%>
+    <%--<c:if test="${not empty message}">INFO : ${message}</c:if> <br/>--%>
+<%--</div>--%>
 <div>
     <div class="container-fluid">
         <div class="col-md-11"><b><spring:message code="books.title"/></b></div>

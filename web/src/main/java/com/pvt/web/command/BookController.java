@@ -47,8 +47,8 @@ public class BookController {
     }
 
     @Transactional
-    @RequestMapping(value = "/getBook", method = {RequestMethod.POST})
-    public String getBooks(HttpServletRequest request, ModelMap map) {
+    @RequestMapping(value = "/getBook", method = {RequestMethod.GET,RequestMethod.POST})
+    public String getBooks(HttpServletRequest request, ModelMap model) {
 
         long bookId = Long.parseLong(request.getParameter("bookId"));
         User currentUser = getUser();
@@ -67,8 +67,8 @@ public class BookController {
                 for (int i = 0; i < formulars.size(); i++) {
                     if (formulars.get(i).getBooks().contains(book)) {
                         flag = false;
+                        model.addAttribute("message", "The book has taken yet");
                         break;
-//                    throw new ServiceException(" book taken yet ");
                     }
                 }
                 if (flag == true) {
@@ -78,6 +78,7 @@ public class BookController {
         }
 
         return "redirect:/books/page";
+//        return "getBook";
     }
 
     @Transactional
@@ -93,14 +94,16 @@ public class BookController {
 
     @Transactional
     @RequestMapping(value = "/getBack", method = {RequestMethod.POST})
-    public String getBack(HttpServletRequest request, ModelMap map) {
+    public String getBack(HttpServletRequest request, ModelMap model) {
 
         long bookId = Long.parseLong(request.getParameter("bookId"));
         long userId = Long.parseLong(request.getParameter("userId"));
 //        User currentUser = getUser();
 //        long userId = currentUser.getUserId();
-        System.out.println("book id = " + bookId + " user id " + userId);
+//        System.out.println("book id = " + bookId + " user id " + userId);
         doGetBack(bookId, userId);
+        model.addAttribute("message", "Book got back");
+
         return "redirect:/formular/page";
     }
 

@@ -50,6 +50,7 @@ public class FormularController {
             globalUserId = userId;
             fillModel(map);
         }
+        globalUserId = null;
         return MAIN;
     }
 
