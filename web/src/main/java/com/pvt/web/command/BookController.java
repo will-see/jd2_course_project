@@ -46,7 +46,7 @@ public class BookController {
         return MAIN;
     }
 
-    @Transactional
+        @Transactional
     @RequestMapping(value = "/getBook", method = {RequestMethod.POST})
     public String getBooks(HttpServletRequest request, ModelMap map) {
 
@@ -60,31 +60,19 @@ public class BookController {
 
         if (bookCount > 0) {
             List<Formular> formulars = formularService.getByUserId(userId);
-            ArrayList<Book> books = new ArrayList<>();
             if (formulars.size() == 0) {
-                books.add(book);
-                bookCount--;
-//                bookService.updateCount(bookId, bookCount);
-//                updateCount(long bookId, int bookCount) {
-//                    Book book = (Book) bookDao.get(bookId);
-                book.setBookCount(bookCount);
-                bookService.update(book);
-                formularService.add(new Formular(null, currentUser, books));
-//                formularService.add(new Formular(null, currentUser, new Item(null,null,book), bookId));
+                addToFormular(book, bookCount, currentUser);
             } else {
                 boolean flag = true;
                 for (int i = 0; i < formulars.size(); i++) {
                     if (formulars.get(i).getBooks().contains(book)) {
                         flag = false;
                         break;
+//                    throw new ServiceException(" book taken yet ");
                     }
-                    throw new ServiceException(" book taken yet ");
                 }
                 if (flag == true) {
-                    bookCount--;
-                    book.setBookCount(bookCount);
-                    bookService.update(book);
-                    formularService.add(new Formular(null, currentUser, books));
+                    addToFormular(book, bookCount, currentUser);
                 }
             }
         }
@@ -92,18 +80,16 @@ public class BookController {
         return "redirect:/books/page";
     }
 
-//    private void addToFormular(){
-//        User user = (User)userService.get(2l);
-//        Book book = (Book) bookService.get(2l);
-//
-//        Formular f = new Formular(null,user,new ArrayList<>());
-//
-//        book.getFormulars().add(f);
-//        f.getBooks().add(book);
-//
-//        formularService.add(f);
-//        bookService.add(book);
-//    }
+    @Transactional
+    void addToFormular(Book book, int bookCount, User currentUser) {
+        Formular formular = new Formular(null, currentUser, new ArrayList<>());
+        book.getFormulars().add(formular);
+        formular.getBooks().add(book);
+        bookCount--;
+        book.setBookCount(bookCount);
+        bookService.update(book);
+        formularService.add(formular);
+    }
 
     @RequestMapping(value = "/getBack", method = {RequestMethod.POST})
     public String getBack(HttpServletRequest request, ModelMap map) {

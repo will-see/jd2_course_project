@@ -34,7 +34,7 @@ public class Formular implements Serializable{
 //        @OneToMany(fetch = FetchType.EAGER, mappedBy = "formular",cascade = CascadeType.ALL)
 //        private List<Book> items = new ArrayList<>();
 
-        @ManyToMany(mappedBy = "formulars")
+        @ManyToMany(fetch = FetchType.EAGER,mappedBy = "formulars")
         private List<Book> books = new ArrayList<Book>();
 
 }

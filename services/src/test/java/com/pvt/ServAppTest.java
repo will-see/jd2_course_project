@@ -89,19 +89,19 @@ public class ServAppTest {
         bookService.add(book);
     }
 
-    @Test
-    public void getBooksList(){
-        User user = (User)userService.get(13l);
-        Book book = (Book) bookService.get(1l);
-        List<Book> books = new ArrayList<>();
-        Formular formular = new Formular(null,user,books);
-        formularService.add(formular);
-        Formular formularFromBase = (Formular)formularService.get(13l);
-        Long userId = formularFromBase.getUser().getUserId();
-        List<Book> list = formularFromBase.getBooks();
-        System.out.println(userId);
-        System.out.println(list);
-    }
+//    @Test
+//    public void getBooksList(){
+//        User user = (User)userService.get(13l);
+//        Book book = (Book) bookService.get(1l);
+//        List<Book> books = new ArrayList<>();
+//        Formular formular = new Formular(null,user,books);
+//        formularService.add(formular);
+//        Formular formularFromBase = (Formular)formularService.get(13l);
+//        Long userId = formularFromBase.getUser().getUserId();
+//        List<Book> list = formularFromBase.getBooks();
+//        System.out.println(userId);
+//        System.out.println(list);
+//    }
 
 //    @Test
 //    public void boksUpdateCountTest() throws SQLException{
@@ -110,7 +110,7 @@ public class ServAppTest {
 
     @Test
     public void serviceFormularId() throws SQLException {
-        System.out.println(formularService.getByUserId(21l));
+        System.out.println(formularService.getByUserId(1l));
     }
 
         @Test

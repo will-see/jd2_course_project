@@ -41,7 +41,7 @@ public class Book {
 //    @JoinColumn(name = "FORMULAR_ID")
 //    private Formular formular;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable (name = "formular_book", joinColumns = {@JoinColumn(name = "bookId")},
     inverseJoinColumns = {@JoinColumn(name = "FORMULAR_ID")}
     )
