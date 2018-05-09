@@ -46,7 +46,7 @@ public class BookController {
         return MAIN;
     }
 
-        @Transactional
+    @Transactional
     @RequestMapping(value = "/getBook", method = {RequestMethod.POST})
     public String getBooks(HttpServletRequest request, ModelMap map) {
 
@@ -91,6 +91,7 @@ public class BookController {
         formularService.add(formular);
     }
 
+    @Transactional
     @RequestMapping(value = "/getBack", method = {RequestMethod.POST})
     public String getBack(HttpServletRequest request, ModelMap map) {
 
@@ -99,17 +100,39 @@ public class BookController {
 //        User currentUser = getUser();
 //        long userId = currentUser.getUserId();
         System.out.println("book id = " + bookId + " user id " + userId);
-        doGetBack(userId, bookId);
+        doGetBack(bookId, userId);
         return "redirect:/formular/page";
     }
 
     @Transactional
     void doGetBack(long bookId, long userId) {
-        Formular formular = (Formular) formularService.getByUserId(userId);
+
+        List<Formular> formulars = formularService.getByUserId(userId);
         Book book = (Book) bookService.get(bookId);
-//        if (formular.contains(book)){
-//
-//        }
+        int bookCount = book.getBookCount();
+        boolean isBookFindedflag = false;
+        Long formularId = null;
+
+        for (Formular formular : formulars) {
+            List<Book> books = formular.getBooks();
+            if (isBookFindedflag == false) {
+                for (Book findingBook : books)
+                    if (findingBook.equals(book)) {
+                        books.remove(book);
+                        book.getFormulars().remove(formular);
+                        formularId = formular.getFormularId();
+                        bookCount++;
+                        book.setBookCount(bookCount);
+                        bookService.update(book);
+                        isBookFindedflag = true;
+                        break;
+                    }
+            }
+        }
+        if (isBookFindedflag == true) {
+            System.out.println(formularId);
+            formularService.deleteId(formularId);
+        }
     }
 
     private User getUser() {
