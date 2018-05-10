@@ -23,7 +23,11 @@
                     default-target-url="/books/page"
         />
 
-        <!--<remember-me-->
+        <remember-me key = "auth_key"
+                     remember-me-parameter="memory"
+                     remember-me-cookie="memory"
+                     token-validity-seconds="300"
+                     user-service-ref="authService"/>
 
         <access-denied-handler error-page="/403" />
         <!--<csrf disabled="true"/>-->

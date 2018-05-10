@@ -28,6 +28,12 @@
                                    maxlength="18"><jsp:text/>
                             </input>
                             <br><br/>
+                            <div class="input-group input-sm">
+                                <div class="check-box">
+                                    <p class="navbar-text">
+                                        <input type="checkbox" id="memory" name = "memory"> Remember Me </p>
+                                </div>
+                            </div>
                             <div>
                                 <button type="submit"><spring:message code="login.submit" /></button>
                             </div>

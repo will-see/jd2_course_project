@@ -128,11 +128,9 @@ public class BookController {
 
         long bookId = Long.parseLong(request.getParameter("bookId"));
         long userId = Long.parseLong(request.getParameter("userId"));
-//        User currentUser = getUser();
-//        long userId = currentUser.getUserId();
-//        System.out.println("book id = " + bookId + " user id " + userId);
         doGetBack(bookId, userId);
-        model.addAttribute("message", "Book got back");
+//        model.addAttribute("message", "Book got back");
+        model.addAttribute("userId", userId);
 
         return "redirect:/formular/page";
     }

@@ -3,6 +3,8 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
+<div class="text">${message}</div>
+
 <div class="container text-center">
     <%--<b><spring:message code="formular.yourBooks"/></b>--%>
     <div class="col-md-10"><b><spring:message code="books.taken"/></b></div>
