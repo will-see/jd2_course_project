@@ -15,9 +15,6 @@
                 <form action="${loginUrl}" method="post">
 
                     <div>
-                        <c:if test="${param.error != null}">
-                            <div><p>Invalid username or password.</p></div>
-                        </c:if>
                         <div>
                             <label for="login"><spring:message code="login.login"/></label><br>
                             <input type="text" id="login" name="login"

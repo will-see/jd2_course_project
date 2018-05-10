@@ -4,6 +4,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <div class="error">${message}</div>
+
 <head>
     <%--<![CDATA[--%>
     <script src="${pageContext.request.contextPath}/assests/js/jquery-1.11.1.min.js" type="text/javascript">
@@ -15,6 +16,15 @@
     <%--]]>--%>
     <title>Books Page</title>
 </head>
+
+<div align="right" valign="right">
+    <sec:authorize access="isAuthenticated()">
+        <form action="${pageContext.request.contextPath}/books/addBook" method="get">
+            <input type="submit" value=<spring:message code="books.AddBtn"/>>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"><jsp:text/>
+        </form>
+    </sec:authorize>
+</div>
 
 <%--<div style="font-size: large">--%>
     <%--<c:if test="${not empty message}">INFO : ${message}</c:if> <br/>--%>
@@ -51,9 +61,6 @@
                                 <input type="submit" value=<spring:message code="books.getBook"/>>
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"><jsp:text/>
                             </form></td>
-                            <%--<td class="col-md-1"><input id="${book.bookId}" class="getBookBtn" type="button"--%>
-                                                        <%--title="get book" value="+" onclick="getBook()"/></td>--%>
-                            <%--<td class="col-md-1"><input id="${book.bookId}" class="btn-primary getBookBtn" type="button" title="get book" value="+"/></td>--%>
                         </sec:authorize>
                     </div>
                 </tr>

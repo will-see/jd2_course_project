@@ -8,8 +8,8 @@
 
 
     <nav class="navbar navbar-inverse">
-        <fmt:setLocale value="${sessionScope.locale}"/>
-        <fmt:setBundle basename="messages" var="i18n"/>
+        <!--<fmt:setLocale value="${sessionScope.locale}"/>-->
+        <!--<fmt:setBundle basename="messages" var="i18n"/>-->
 
         <div class="container-fluid">
             <div class="navbar-header">

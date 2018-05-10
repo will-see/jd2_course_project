@@ -20,6 +20,11 @@
         <put-attribute name="body" value="/WEB-INF/view/errors/403.jsp"/>
     </definition>
 
+    <definition name="add" extends="default">
+        <put-attribute name="title" value="new book"/>
+        <put-attribute name="body" value="/WEB-INF/view/books/newBook.jsp"/>
+    </definition>
+
     <definition name="books/main" extends="default">
         <put-attribute name="title" value="Books Info"/>
         <put-attribute name="body" value="/WEB-INF/view/books/main.jsp"/>

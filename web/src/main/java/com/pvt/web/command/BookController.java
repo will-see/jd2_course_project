@@ -2,10 +2,12 @@ package com.pvt.web.command;
 
 import com.google.gson.Gson;
 import com.pvt.dto.BookDto;
+import com.pvt.entities.Author;
 import com.pvt.entities.Book;
 import com.pvt.entities.Formular;
 import com.pvt.entities.User;
 import com.pvt.services.*;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,16 +40,44 @@ public class BookController {
     private UserService userService;
     @Autowired
     private FormularService formularService;
+    @Autowired
+    private AuthorService authorService;
 
     @RequestMapping(value = "/page", method = {RequestMethod.GET, RequestMethod.POST})
-    public String allBooks(ModelMap map) {
+    public String allBooks(ModelMap map, @RequestParam(defaultValue = "") String message) {
+
         fillModel(map);
 
         return MAIN;
     }
 
+    @RequestMapping(value = "/addBook", method = {RequestMethod.GET, RequestMethod.POST})
+    public String addBooks() {
+               return "add";
+    }
+
     @Transactional
-    @RequestMapping(value = "/getBook", method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "/doAdd", method = {RequestMethod.GET, RequestMethod.POST})
+    public String addBooks(HttpServletRequest request) {
+
+            String title = request.getParameter("title");
+            String ganr = request.getParameter("ganr");
+            String pages= request.getParameter("pages");
+            String quantity= request.getParameter("quantity");
+            String name= request.getParameter("name");
+            String country= request.getParameter("coutry");
+            String year= request.getParameter("year");
+
+            Author author = new Author(null, name, Integer.parseInt(year), country, null);
+            Book book = new Book(null, title, ganr, Integer.parseInt(pages), author, Integer.parseInt(quantity), null);
+            authorService.add(author);
+            bookService.add(book);
+
+        return "redirect:/books/page";
+    }
+
+    @Transactional
+    @RequestMapping(value = "/getBook", method = {RequestMethod.GET, RequestMethod.POST})
     public String getBooks(HttpServletRequest request, ModelMap model) {
 
         long bookId = Long.parseLong(request.getParameter("bookId"));

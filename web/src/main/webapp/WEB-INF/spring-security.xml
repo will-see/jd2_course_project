@@ -12,6 +12,7 @@
         <intercept-url pattern="/welcome" access="permitAll"/>
         <intercept-url pattern="/formular" access="isAuthenticated()"/>
         <intercept-url pattern="/users/page" access="hasRole('ROLE_admin')"/>
+        <intercept-url pattern="/books/addBook" access="hasRole('ROLE_admin')"/>
         <!--<intercept-url pattern="/users/page" access="isAuthenticated()"/>-->
         <intercept-url pattern="/books/page" access="permitAll"/>
         <!--<logout invalidate-session="true" logout-url="logout" logout-success-url="/login"/>-->
@@ -21,6 +22,9 @@
                     authentication-failure-url="/access_denied"
                     default-target-url="/books/page"
         />
+
+        <!--<remember-me-->
+
         <access-denied-handler error-page="/403" />
         <!--<csrf disabled="true"/>-->
         <!--<csrf/>-->

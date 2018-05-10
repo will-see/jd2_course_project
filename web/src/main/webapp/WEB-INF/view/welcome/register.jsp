@@ -4,14 +4,12 @@
 <div class="container text-center">
     <div class="error">${errorMsg}</div>
     <form action="${pageContext.request.contextPath}/registerProcess" method="post" accept-charset="UTF-8">
-        <%--<fmt:setLocale value="${sessionScope.locale}"/>--%>
-        <%--<fmt:setBundle basename="messages" var="i18n"/>--%>
         <br>
-        <b><spring:message code="users.name"/></b><br><input type="name" name="name" maxlength="30"/>
+        <b><spring:message code="users.name"/></b><br><input type="name" name="name" required maxlength="30"/>
         <br>
-        <b><spring:message code="users.login"/></b><br><input type="login" name="login" maxlength="30"/>
+        <b><spring:message code="users.login"/></b><br><input type="login" name="login" required maxlength="30"/>
         <br>
-        <b><spring:message code="users.pass"/></b><br><input type="password" name="password" maxlength="30"/>
+        <b><spring:message code="users.pass"/></b><br><input type="password" name="password" required maxlength="30"/>
         <br>
         <b><spring:message code="users.age"/></b><br><input type="age" name="age" required pattern="^[0-9]+$"
                                                             maxlength="3"/>
