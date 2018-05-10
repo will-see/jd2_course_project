@@ -5,11 +5,11 @@ import com.pvt.entities.Role;
 import com.pvt.entities.User;
 import com.pvt.services.ServiceException;
 import com.pvt.services.UserService;
-import com.pvt.web.auth.Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -46,8 +46,9 @@ public class LoginController {
     @RequestMapping(value = "/registerProcess", method = RequestMethod.POST)
     public ModelAndView addUser(HttpServletRequest request, HttpServletResponse response,
                                 @ModelAttribute("user") User user) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user.setRole(new Role(null,"user",null));
-//        user.setPassword(Encoder.encode(user.getPassword()));
+        user.setPassword(encoder.encode(user.getPassword()));
         userService.add(user);
         return new ModelAndView("login", "name", user.getName());
     }

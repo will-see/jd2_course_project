@@ -23,21 +23,27 @@
                     default-target-url="/books/page"
         />
 
-        <remember-me key = "auth_key"
+        <remember-me key="auth_key"
                      remember-me-parameter="memory"
                      remember-me-cookie="memory"
                      token-validity-seconds="300"
                      user-service-ref="authService"/>
 
-        <access-denied-handler error-page="/403" />
+        <access-denied-handler error-page="/403"/>
         <!--<csrf disabled="true"/>-->
         <!--<csrf/>-->
     </http>
 
     <authentication-manager>
-        <authentication-provider user-service-ref="authService"/>
+        <authentication-provider user-service-ref="authService">
+            <password-encoder ref="bcryptBean"/>
+        </authentication-provider>
     </authentication-manager>
 
     <beans:bean id="authService" class="com.pvt.web.auth.AuthenticationService"/>
+    <beans:bean id="bcryptBean" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <beans:constructor-arg name="strength" value="12"/>
+    </beans:bean>
+
 
 </beans:beans>

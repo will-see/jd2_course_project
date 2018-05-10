@@ -8,6 +8,7 @@ import com.pvt.services.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -73,6 +74,18 @@ public class ServAppTest {
     @Test
     public void serviceFormularDtoTest() throws SQLException {
         System.out.println(formularService.getUserBooksInFormular(1l));
+    }
+
+    @Test
+    public void encodeBCryptTest() throws SQLException {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        System.out.println(encoder.encode("admin"));
+        System.out.println(encoder.encode("admin2"));
+        System.out.println(encoder.encode("admin3"));
+        System.out.println(encoder.encode("user"));
+        System.out.println(encoder.encode("user2"));
+        System.out.println(encoder.encode("user3"));
+        System.out.println(encoder.encode("dima"));
     }
 
     @Test

@@ -25,12 +25,14 @@ INSERT INTO libhib_db.books (bookId, bookCount, ganr, pages, title, AUTHOR_ID) V
 INSERT INTO libhib_db.books (bookId, bookCount, ganr, pages, title, AUTHOR_ID) VALUES (7, 10, 'unknown', 105, 'book1', 7);
 INSERT INTO libhib_db.books (bookId, bookCount, ganr, pages, title, AUTHOR_ID) VALUES (8, 10, 'unknown', 106, 'book2', 8);
 
-INSERT INTO libhib_db.users (USER_ID, AGE, LOGIN, FIRST_NAME, PASSWORD, SEX, ROLE_ID) VALUES (1, 100, 'admin', 'admin', 'admin', 'male', 1);
-INSERT INTO libhib_db.users (USER_ID, AGE, LOGIN, FIRST_NAME, PASSWORD, SEX, ROLE_ID) VALUES (2, 20, 'admin2', 'admin2', 'admin2', 'male', 2);
-INSERT INTO libhib_db.users (USER_ID, AGE, LOGIN, FIRST_NAME, PASSWORD, SEX, ROLE_ID) VALUES (3, 30, 'admin3', 'admin3', 'admin3', 'male', 3);
-INSERT INTO libhib_db.users (USER_ID, AGE, LOGIN, FIRST_NAME, PASSWORD, SEX, ROLE_ID) VALUES (4, 40, 'user', 'user', 'user', 'male', 4);
-INSERT INTO libhib_db.users (USER_ID, AGE, LOGIN, FIRST_NAME, PASSWORD, SEX, ROLE_ID) VALUES (5, 50, 'user2', 'user2', 'user2', 'male', 5);
-INSERT INTO libhib_db.users (USER_ID, AGE, LOGIN, FIRST_NAME, PASSWORD, SEX, ROLE_ID) VALUES (6, 60, 'user3', 'user3', 'user3', 'male', 6);
+INSERT INTO libhib_db.users (USER_ID, AGE, LOGIN, FIRST_NAME, PASSWORD, SEX, ROLE_ID) VALUES (1, 100, 'admin', 'admin', '$2a$10$O3jhcqAFrQyL7pZajBOF5eM5n4Diu/dhSynbwxBNPSadeWa1ZGhpK', 'male', 1);
+INSERT INTO libhib_db.users (USER_ID, AGE, LOGIN, FIRST_NAME, PASSWORD, SEX, ROLE_ID) VALUES (2, 20, 'admin2', 'admin2', '$2a$10$D/I5v96Q1/c.oH570iJbWOqu2nMVZYAp.1ZNqVf7M0j2w/i2UfagO', 'male', 2);
+INSERT INTO libhib_db.users (USER_ID, AGE, LOGIN, FIRST_NAME, PASSWORD, SEX, ROLE_ID) VALUES (3, 30, 'admin3', 'admin3', '$2a$10$2ylwOG/Cr3tlw9w5nX9FEOB7./ebS.YqnDtGzh7YilLFBPNtUGUha', 'male', 3);
+INSERT INTO libhib_db.users (USER_ID, AGE, LOGIN, FIRST_NAME, PASSWORD, SEX, ROLE_ID) VALUES (4, 40, 'user', 'user', '$2a$10$0o2KNzi/x7wGXw/gmyI3XubrOL/k.bXxLjdXLo4XJinmSKNVA7dXu', 'male', 4);
+INSERT INTO libhib_db.users (USER_ID, AGE, LOGIN, FIRST_NAME, PASSWORD, SEX, ROLE_ID) VALUES (5, 50, 'user2', 'user2', '$2a$10$a4e/t8a29kWOis6Bz9spQ.o1wTclCeEc59.BKXPGCHzeENlLNW2OW', 'male', 5);
+INSERT INTO libhib_db.users (USER_ID, AGE, LOGIN, FIRST_NAME, PASSWORD, SEX, ROLE_ID) VALUES (6, 60, 'user3', 'user3', '$2a$10$Pql/43vKa0/L/n1dth0OBejO46oLQ3kJY0j1eNGBLhiXZpQwGE9Oy', 'male', 6);
+INSERT INTO libhib_db.users (USER_ID, AGE, LOGIN, FIRST_NAME, PASSWORD, SEX, ROLE_ID) VALUES (7, 29, 'dima', 'dima', '$2a$10$bEz4saEiWoBrooyWH0fnt.AlrKJOA2t7/iKgQFhXDA0KyL8uQMqFq', 'male', 7);
+INSERT INTO libhib_db.users (USER_ID, AGE, LOGIN, FIRST_NAME, PASSWORD, SEX, ROLE_ID) VALUES (8, 10, 'qa', 'qa', '$2a$10$4/culk3d64lX6ruwInzt6uhelRpXQPEIv22I3KFP58p45Mdv7yKMK', 'male', 8);
 
 INSERT INTO libhib_db.formulars (FORMULAR_ID, USER_ID) VALUES (1, 1);
 INSERT INTO libhib_db.formulars (FORMULAR_ID, USER_ID) VALUES (2, 1);
